@@ -1,0 +1,16 @@
+.container-fluid{
+  background-color: #082D0F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.navbar-brand{
+    color: white;
+
+}
+
+.nav-link{
+    color: white;
+}
