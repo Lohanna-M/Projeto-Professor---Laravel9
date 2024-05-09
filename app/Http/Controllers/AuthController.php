@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -21,14 +22,29 @@ class AuthController extends Controller
             'password' => 'required|confirmed'
         ])->validate();
 
-       if ($user){
-        UserRole::create([
-            'user_id' => $user->id,
-            'role_id' => 1
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
         ]);
 
-       }
-        return redirect()->route('login');
+        UserRole::create([
 
+        ]);
+
+        return redirect()->route('login');
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function loginAction(Request $request)
+    {
+        Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ])->validate();
     }
 }

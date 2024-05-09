@@ -8,8 +8,17 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="{{ route('register.save') }}" method="POST" class="user">
+    <form action="{{ route('login.action') }}" method="POST" class="user">
         @csrf
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $errors)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="form-group">
           <label for="exampleInputEmail1">Email:</label>
           <input value="{{ old('email') }}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
