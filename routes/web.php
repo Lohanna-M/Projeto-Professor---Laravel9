@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivittiesController;
-use App\Http\Controllers\ActivityResponseController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 use App\Models\Activitties;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('Home');
+Route::controller(AuthController::class)->group(function (){
+    Route::get('register', 'register')->name('register');
+    Route::post('register', 'registerSave')->name('register.save');
+});
+
 Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties');
 
 
