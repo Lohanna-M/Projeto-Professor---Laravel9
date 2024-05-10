@@ -1,82 +1,31 @@
-body{
-    display: flex;
-  justify-content: center;
-    margin-top:10%;
-}
-.card {
-    width: 450px;
-    height: 500px;
-    background: #F4F6FB;
-    border: 1px solid white;
-    box-shadow: 10px 10px 64px 0px #082D0F;
-    -webkit-box-shadow: 10px 10px 64px 0px #082D0F;
-    -moz-box-shadow: 10px 10px 64px 0px #082D0F;
-  }
+button{
+        align-items: center;
+        background-color: rgb(0, 61, 0);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: .25rem;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        display: inline-flex;
+        font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        justify-content: center;
+        padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+        text-decoration: none;
+        width: auto;
+       }
 
-  .form {
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+       button:hover,
+       button:focus {
+        border-color: rgba(0, 0, 0, 0.15);
+        color: rgb(0, 219, 0);;
+       }
 
-  }
+       button:hover {
+        transform: translateY(-1px);
+       }
 
-  .card_header {
-    display: flex;
-    align-items: center;
-  }
-
-  .card svg {
-    color: #082D0F;
-    margin-bottom: 20px;
-    margin-right: 5px;
-  }
-
-  .form_heading {
-    padding-bottom: 20px;
-    font-size: 21px;
-    color: #082D0F;
-  }
-
-  .field {
-    padding-bottom: 10px;
-  }
-
-  .input {
-    border-radius: 5px;
-    background-color: #082D0F;
-    padding: 5px;
-    width: 100%;
-    color: #082D0F;
-    border: 1px solid #dadaf7
-  }
-
-  .input:focus-visible {
-    outline: 1px solid #aeaed6;
-  }
-
-  .input::placeholder {
-    color: #bcbcdf;
-  }
-
-  label {
-    color: #000000;
-    font-size: 14px;
-    display: block;
-    padding-bottom: 4px;
-  }
-
-  button {
-    background-color: #082D0F;
-    margin-top: 10px;
-    font-size: 14px;
-    padding: 7px 12px;
-    height: auto;
-    font-weight: 500;
-    color: white;
-    border: none;
-  }
-
-  button:hover {
-    background-color: #0d4718;
-  }
+       .card-body{
+        width: auto;
+        height: auto;
+       }

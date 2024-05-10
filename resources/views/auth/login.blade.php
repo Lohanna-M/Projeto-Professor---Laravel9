@@ -5,39 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
     <title>Login</title>
 </head>
 <body>
-    <form action="{{ route('login.action') }}" method="POST" class="user">
-        @csrf
-        @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $errors)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <section class="intro">
+        <div class="mask d-flex align-items-center h-100" style="background-color: #D6D6D6;">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card" style="border-radius: 1rem;">
+                  <div class="card-body p-5 text-center">
+
+                    <div class="my-md-5 pb-5">
+
+                      <h1 class="fw-bold mb-0">Bem-vindo</h1>
+
+                      <i class="fas fa-user-astronaut fa-3x my-5"></i>
+
+                      <div class="form-outline mb-4">
+                        <input type="email" id="typeEmail" class="form-control form-control-lg" />
+                        <label class="form-label" for="typeEmail">Email</label>
+                        @error('email')
+                        <div class="text-red-400 text-sm">{{ $message }}</div>
+                    @enderror
+                      </div>
+
+                      <div class="form-outline mb-5">
+                        <input type="password" id="typePassword" class="form-control form-control-lg" />
+                        <label class="form-label" for="typePassword">Senha</label>
+                        @error('password')
+                        <div class="text-red-400 text-sm">{{ $message }}</div>
+                    @enderror
+                      </div>
+                    <button type="submit">Login</button>
+                    <button  type="submit">Registre-se</button>
+
+                    </div>
+
+                    <div>
+                      <p class="mb-0">Não possui uma conta?<a href="#!" class="text-body fw-bold">Registre-se</a></p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        @endif
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email:</label>
-          <input value="{{ old('email') }}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-          @error('email')
-          <div class="text-red-400 text-sm">{{ $message }}</div>
-      @enderror
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Senha:</label>
-          <input value="{{ old('password') }}" type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
-          @error('password')
-          <div class="text-red-400 text-sm">{{ $message }}</div>
-      @enderror
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Lembre-me</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
+      </section>
 </body>
 </html>
