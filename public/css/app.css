@@ -1,12 +1,26 @@
+body{
+    background-color: rgb(241, 255, 251);
+}
+
+h1{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 10%;
+}
+
+.form-label{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+
 button{
         align-items: center;
         background-color: rgb(0, 61, 0);
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: .25rem;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgb(255, 255, 255);
         cursor: pointer;
         display: inline-flex;
-        font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: system-ui,apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
         font-size: 16px;
         font-weight: 600;
         justify-content: center;
@@ -25,7 +39,21 @@ button{
         transform: translateY(-1px);
        }
 
-       .card-body{
+       .register_button{
+        text-decoration: none;
+        color: rgb(0, 38, 255);
+        text-decoration:underline;
+        font-weight: bold;
+       }
+
+       .card, .card-body{
         width: auto;
         height: auto;
+        background-color: rgb(203, 231, 203);
+        border-radius: 50px;
+       }
+
+       .row{
+        justify-content: center;
+        margin-top: 10%;
        }
