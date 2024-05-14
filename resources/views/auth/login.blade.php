@@ -18,7 +18,6 @@
                   <div class="card-body p-5 text-center">
 
                     <div class="my-md-5 pb-5">
-
                       <h1>Bem-vindo</h1>
 
                       <i class="fas fa-user-astronaut fa-3x my-5"></i>
@@ -37,16 +36,13 @@
                         @error('password')
                         <div class="text-red-400 text-sm">{{ $message }}</div>
                     @enderror
-                      </div>
-                    <button type="submit" >Login</button>
-                    <button  type="submit">Registre-se</button>
-
                     </div>
-
+                    <a href="{{ route('Activitties') }}"><button type="submit">Login</button></a>
+                    <a href="{{ route('register') }}"><button  type="submit">Registre-se</button></a>
+                    </div>
                     <div>
                       <p class="mb-0">Não possui uma conta?<a href="{{ route('register') }}" class="register_button">Registre-se</a></p>
                     </div>
-
                   </div>
                 </div>
               </div>

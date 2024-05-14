@@ -17,19 +17,21 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
+
         Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|confirmed'
+            'password' => 'required'
         ])->validate();
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
 
         UserRole::create([
-
+            'user_id'=> $user->id,
+            'role_id'=> 2
         ]);
 
         return redirect()->route('login');

@@ -9,18 +9,38 @@
     <title>Activitties</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <a class="nav-link"  href="#">Atividades</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Respostas</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+   <!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Disciplina</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Atividades</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Aluno</a>
+         </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+
 </body>
 </html>

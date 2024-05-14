@@ -1,3 +1,11 @@
-.bg-body-tertiary {
-    background: red;
+.navbar{
+    background-color: rgb(0, 61, 0);
+}
+
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: rgb(0, 219, 0);
 }
