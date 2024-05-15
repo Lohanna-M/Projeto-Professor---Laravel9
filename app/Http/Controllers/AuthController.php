@@ -34,6 +34,11 @@ class AuthController extends Controller
             'role_id'=> 2
         ]);
 
+        UserRole::create([
+            'user_id'=> $user->id,
+            'role_id'=> 3
+        ]);
+
         return redirect()->route('login');
     }
 
