@@ -8,7 +8,6 @@
 </head>
 <body>
     <section id="register_activitties">
-        <a href="{{ route('Register_activitties') }}">
         <form>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">

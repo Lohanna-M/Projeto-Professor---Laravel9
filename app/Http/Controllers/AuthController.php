@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
         return view('auth/register');
     }
@@ -42,7 +42,7 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function login()
+    public function login(Request $request)
     {
         return view('auth.login');
     }

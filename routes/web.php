@@ -25,10 +25,8 @@ Route::controller(AuthController::class)->group(function (){
 });
 
 Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties');
-Route::get('/register',[ActivittiesController::class, 'index'])->name('Register_activitties');
 Route::get('/disciplina',[ActivittiesController::class, 'index'])->name('Disciplina');
-Route::get('/register',[ActivittiesController::class, 'index'])->name('Register_disciplina');
 Route::get('/aluno',[ActivittiesController::class, 'index'])->name('Aluno');
-Route::get('/register',[ActivittiesController::class, 'index'])->name('Register_aluno');
+
 
 
