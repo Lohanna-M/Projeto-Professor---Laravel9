@@ -7,7 +7,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('Activitties') }}">Ver Atividades</a></li>
-                <li><a class="dropdown-item" href="#">Registrar Atividade</a></li>
+                <li><a class="dropdown-item" href="{{ route('RegisterActivitties') }}">Registrar Atividade</a></li>
             </ul>
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
