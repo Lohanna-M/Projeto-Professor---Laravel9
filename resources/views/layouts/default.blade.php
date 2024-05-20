@@ -15,7 +15,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('Disciplina') }}">Ver Disciplinas</a></li>
-                <li><a class="dropdown-item" href="#">Registrar Disciplina</a></li>
+                <li><a class="dropdown-item" href="{{ route('RegisterDisciplina') }}">Registrar Disciplina</a></li>
             </ul>
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -23,7 +23,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('Aluno') }}">Ver Alunos</a></li>
-                <li><a class="dropdown-item" href="#">Registrar Aluno</a></li>
+                <li><a class="dropdown-item" href="{{ route('RegisterAluno')}}">Registrar Aluno</a></li>
             </ul>
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">

@@ -8,6 +8,7 @@ class ActivittiesController extends Controller
 {
     public function index (Request $request)
     {
+     
         return view('activitties');
     }
 }

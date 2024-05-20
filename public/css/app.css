@@ -1,74 +1,153 @@
 body{
-    background-color: rgb(241, 255, 251);
+    background-color: #e6fde6;
 }
 
-h1{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin-bottom: 10%;
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
 }
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    background-color: #094701;
+    color: #fff;
+    border: 1px solid #333;
+  }
 
-.form-label{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
-}
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #f7f7f7;
+  }
 
-.form-check-label{
-    float: left;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
+  .title::before {
+    width: 18px;
+    height: 18px;
+  }
 
-.form-check{
-    margin-top: 20px;
-}
+  .title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+  }
 
-button{
-        align-items: center;
-        background-color: rgb(0, 61, 0);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: .25rem;
-        color: rgb(255, 255, 255);
-        cursor: pointer;
-        display: inline-flex;
-        font-family: system-ui,apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        justify-content: center;
-        padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-        text-decoration: none;
-        width: auto;
-       }
+  .title::before,
+  .title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: #43f348;
+  }
 
-       button:hover,
-       button:focus {
-        border-color: rgba(0, 0, 0, 0.15);
-        color: rgb(0, 219, 0);
-       }
+  .message,
+  .signin {
+    font-size: 14.5px;
+    color: rgb(255, 255, 255);
+  }
 
-       button:hover {
-        transform: translateY(-1px);
-       }
+  .signin {
+    text-align: center;
+  }
 
-       .register_button{
-        text-decoration: none;
-        color: rgb(0, 38, 255);
-        text-decoration:underline;
-        font-weight: bold;
-       }
+  .signin a:hover {
+    text-decoration: underline #4CAF50;
+  }
 
-       .card, .card-body{
-        width: auto;
-        height: auto;
-        background-color: rgb(203, 231, 203);
-        border-radius: 50px;
-       }
+  .signin a {
+    color: white;
+  }
 
-       .row{
-        justify-content: center;
-        margin-top: 10%;
-       }
+  .flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+  }
 
-       .button{
-        text-decoration: none;
-        background-color: rgb(0, 54, 12);
-        color: white;
-       }
+  .form label {
+    position: relative;
+  }
+
+  .form label .input {
+    background-color: #017214;
+    color: #fff;
+    width: 100%;
+    padding: 20px 05px 05px 10px;
+    outline: 0;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+  }
+
+  .form label .input + span {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+  }
+
+  .form label .input:placeholder-shown + span {
+    top: 12.5px;
+    font-size: 0.9em;
+  }
+
+  .form label .input:focus + span,
+  .form label .input:valid + span {
+    color: #11fa44;
+    top: 0px;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+
+  .input {
+    font-size: medium;
+  }
+
+  .submit {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: #094701;
+    font-size: 16px;
+    transform: .3s ease;
+    background-color: #43f348;
+  }
+
+  .submit:hover {
+    background-color: #38ce3d;
+  }
+
+  .register_button{
+    color:white;
+  }
+
+  @keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
