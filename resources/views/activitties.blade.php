@@ -40,31 +40,12 @@
                     <td>Atividade</td>
                     <td>Português</td>
                     <td>10</td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                            <label for="checkbox2"></label>
-                        </span>
 
-                    </td>
-                    <td>Dominique Perrier</td>
-                    <td>Atividade</td>
-                    <td>Matemática</td>
-                    <td>9</td>
-                </tr>
-                <tr>
                     <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                            <label for="checkbox3"></label>
-                        </span>
+                        <a href="" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
+                        <a href="" button type="button" class="btn btn-success   btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                        <a href="" button type="button" class="btn btn-danger  btn-rounded" data-mdb-ripple-init>Deletar Atividade</a>
                     </td>
-                    <td>Maria Anders</td>
-                    <td>Atividade</td>
-                    <td>Biologia</td>
-                    <td>8.5</td>
                 </tr>
             </tbody>
         </table>

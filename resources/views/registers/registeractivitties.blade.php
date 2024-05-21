@@ -10,18 +10,19 @@
     <title>Registrar Atividades</title>
 </head>
 <body>
-    <form class="form">
+    <form action="{{ route('StoreActivitties') }}" method="POST" class="form">
+        @csrf
        <div class="conteiner"> <p class="title">Registrar Atividade</p>
         <label>
-            <input class="input" type="text" placeholder="" required="name">
+            <input class="input" type="text" placeholder="" name="name" required="name">
             <span>Atividade:</span>
         </label>
         <label>
-            <input class="input" type="text" placeholder="" required="name">
+            <input class="input" type="text" placeholder="" name="name" required="name">
             <span>Disciplina</span>
         </label>
         <label>Descrição da Atividade:</label>
-        <textarea placeholder="Escreva aqui" ></textarea>
+        <textarea placeholder="Escreva aqui"></textarea>
         <button class="submit">Registrar</button>
        </div>
     </form>

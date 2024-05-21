@@ -27,10 +27,16 @@ Route::controller(AuthController::class)->group(function (){
 });
 
 Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties');
-Route::get('/registeractivitties',[RegisterActivittiesController::class, 'index'])->name('RegisterActivitties');
+Route::get('/registeractivitties',[ActivittiesController::class, 'create'])->name('RegisterActivitties');
+Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
+Route::post('/registeractivitties/show', [ActivittiesController::class, 'show'])->name('ShowActivitties');
+
 Route::get('/disciplina',[ActivittiesController::class, 'index'])->name('Disciplina');
+
 Route::get('/registerdisciplina',[RegisterDisciplinaController::class, 'index'])->name('RegisterDisciplina');
+
 Route::get('/aluno',[ActivittiesController::class, 'index'])->name('Aluno');
+
 Route::get('/registeraluno',[RegisterAlunoController::class, 'index'])->name('RegisterAluno');
 
 

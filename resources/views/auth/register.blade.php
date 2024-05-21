@@ -25,6 +25,18 @@
             <input class="input" type="password" name="password" required="password">
             <span>Senha:</span>
         </label>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+             Aluno
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <label class="form-check-label" for="flexCheckChecked">
+              Professor
+            </label>
+          </div>
         <a href="{{ route('login') }}"><button class="submit">Registre-se</button></a>
         </div>
     </form>
