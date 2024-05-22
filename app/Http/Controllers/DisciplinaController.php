@@ -1,25 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Disciplina;
+use App\Models\Discipline;
 use Illuminate\Http\Request;
 
 class DisciplinaController extends Controller
 {
     public function index ()
     {
-        $disciplines = Disciplina::all();
-        return view('Disciplina')->with('disciplina', $disciplines);
+        $disciplines = Discipline::all();
+        return view('disciplina')->with('discipline', $disciplines);
     }
 
     public function create()
     {
-        $discipline = Disciplina::get();
-        return view('registers.registeractivitties', compact('discipline'));
+        return view('registers.registerdisciplina');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        Discipline::create([
+            'name'=> $request->name
+         ]);
+         return redirect('disciplina');
+    }
+
+    public function show($id){
+        $disciplines = Discipline::find($id);
+        return view('disciplina')->with('disciplina', $disciplines);
 
     }
 }

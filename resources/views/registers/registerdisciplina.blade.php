@@ -10,10 +10,11 @@
     <title>Registrar Disciplina</title>
 </head>
 <body>
-    <form class="form">
+    <form action="{{ route('StoreDisciplina') }}" method="POST" class="form">
+        @csrf
        <div class="conteiner"> <p class="title">Registrar Disciplina</p>
         <label>
-            <input class="input" type="name" placeholder="" required="name">
+            <input class="input" name="name" type="name" placeholder="" required="name">
             <span>Nome da Disciplina:</span>
         </label>
         <button class="submit">Registrar</button>

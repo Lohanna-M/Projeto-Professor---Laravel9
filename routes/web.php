@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivittiesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\RegisterActivittiesController;
 use App\Http\Controllers\RegisterAlunoController;
 use App\Http\Controllers\RegisterDisciplinaController;
@@ -31,9 +32,11 @@ Route::get('/registeractivitties',[ActivittiesController::class, 'create'])->nam
 Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
 Route::post('/registeractivitties/show', [ActivittiesController::class, 'show'])->name('ShowActivitties');
 
-Route::get('/disciplina',[ActivittiesController::class, 'index'])->name('Disciplina');
+Route::get('/disciplina',[DisciplinaController::class, 'index'])->name('Disciplina');
+Route::get('/registerdisciplina',[DisciplinaController::class, 'create'])->name('RegisterDisciplina');
+Route::post('/registerdisciplina/store',[DisciplinaController::class, 'store'])->name('StoreDisciplina');
+Route::post('/registerdisciplina/show',[DisciplinaController::class, 'show'])->name('ShowDisciplina');
 
-Route::get('/registerdisciplina',[RegisterDisciplinaController::class, 'index'])->name('RegisterDisciplina');
 
 Route::get('/aluno',[ActivittiesController::class, 'index'])->name('Aluno');
 

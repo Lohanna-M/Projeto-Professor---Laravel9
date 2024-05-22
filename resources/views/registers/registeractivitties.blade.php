@@ -10,7 +10,7 @@
     <title>Registrar Atividades</title>
 </head>
 <body>
-    <form action="{{ route('StoreActivitties') }}" method="POST" class="form">
+    <form action="{{ route('StoreActivitties') }}" method="POST" enctype="multipart/form-data" class="form">
         @csrf
        <div class="conteiner"> <p class="title">Registrar Atividade</p>
         <label>
@@ -18,9 +18,14 @@
             <span>Atividade:</span>
         </label>
         <label>
-            <input class="input" type="text" placeholder="" name="name" required="name">
-            <span>Disciplina</span>
+            <select name="disciplina" id="">
+                @foreach ($diciplines as $dicipline )
+                <option value="{{ $dicipline->id }}">{{ $dicipline->name }}</option>
+                @endforeach
+            </select>
         </label>
+        <input type="file" id="filepath" name="filepath"/>
+
         <label>Descrição da Atividade:</label>
         <textarea placeholder="Escreva aqui"></textarea>
         <button class="submit">Registrar</button>

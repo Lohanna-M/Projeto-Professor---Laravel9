@@ -21,6 +21,6 @@ class Activitties extends Model
      */
     public function diciplines()
     {
-        return $this->belongsTo(Disciplina::class, 'dicipline_id', 'id');
+        return $this->belongsTo(Discipline::class, 'dicipline_id', 'id');
     }
 }
