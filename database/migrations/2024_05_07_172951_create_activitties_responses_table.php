@@ -20,10 +20,10 @@ return new class extends Migration
             $table->foreignId('user_id')
                     ->constrained()
                     ->onDelete('CASCADE');
-            $table->boolean('check');
-            $table->float('note');
-            $table->string('filepath');
-            $table->text('description');
+            $table->boolean('check')->nullable();
+            $table->float('note')->nullable();
+            $table->string('filepath')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

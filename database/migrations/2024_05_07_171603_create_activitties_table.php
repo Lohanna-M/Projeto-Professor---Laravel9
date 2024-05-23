@@ -20,9 +20,9 @@ return new class extends Migration
             $table->foreignId('dicipline_id')
                     ->constrained()
                     ->onDelete('CASCADE');
-            $table->string('name');
-            $table->string('filepath');
-            $table->text('description');
+            $table->string('name')->nullable();
+            $table->string('filepath')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +34,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activitties');
+        Schema::create('activitties', function (Blueprint $table) {
+            $table->dropColumn('filepath');
+    });
     }
 };

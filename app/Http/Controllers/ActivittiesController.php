@@ -30,7 +30,6 @@ class ActivittiesController extends Controller
            'dicipline_id' => $request->filepath,
            'dicipline_id' => $request->description,
         ]);
-        $input['filepath']->store('imagens','public');
         return redirect('activitties')->with('flash message', 'Atividade Criada!');
     }
 

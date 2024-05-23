@@ -20,13 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(AuthController::class)->group(function (){
-    Route::get('/register', 'register')->name('register');
-    Route::post('/register', 'registerSave')->name('register.save');
+    Route::middleware('admin')->group(function () {
+        Route::get('/register')->name('register');
+        Route::post('/registerSave')->name('register.save');
 
-    Route::get('/','login', 'login')->name('login');
-    Route::post('/', 'login', 'login.Action')->name('login.action');
+        Route::get('/','/login')->name('login');
+        Route::post('/', 'login.Action')->name('login.action');
+    });
 });
-
 Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties');
 Route::get('/registeractivitties',[ActivittiesController::class, 'create'])->name('RegisterActivitties');
 Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
@@ -36,7 +37,6 @@ Route::get('/disciplina',[DisciplinaController::class, 'index'])->name('Discipli
 Route::get('/registerdisciplina',[DisciplinaController::class, 'create'])->name('RegisterDisciplina');
 Route::post('/registerdisciplina/store',[DisciplinaController::class, 'store'])->name('StoreDisciplina');
 Route::post('/registerdisciplina/show',[DisciplinaController::class, 'show'])->name('ShowDisciplina');
-
 
 Route::get('/aluno',[ActivittiesController::class, 'index'])->name('Aluno');
 

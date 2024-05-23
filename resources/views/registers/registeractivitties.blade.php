@@ -24,7 +24,7 @@
                 @endforeach
             </select>
         </label>
-        <input type="file" id="filepath" name="filepath"/>
+        <input type="file"name="filepath">
 
         <label>Descrição da Atividade:</label>
         <textarea placeholder="Escreva aqui"></textarea>
