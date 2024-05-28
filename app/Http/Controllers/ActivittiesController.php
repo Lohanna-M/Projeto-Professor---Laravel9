@@ -23,7 +23,13 @@ class ActivittiesController extends Controller
 
     public function store(Request $request)
     {
-        Activitties::create([
+        if($request->hasFile('filepath')){
+        $image = $request->file('filepath');
+        $imageName = time(). '.' .$image->getClientOriginalExtension();
+        $filePath = public_path('/images');
+        $image->move($filePath,$imageName);
+    }
+        $activitties = Activitties::create([
             'user_id'=> 'dicipline_id',
            'dicipline_id' => $request->dicipline,
            'dicipline_id' => $request->name,
