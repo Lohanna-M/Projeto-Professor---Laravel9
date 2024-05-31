@@ -26,11 +26,11 @@ class ActivittiesController extends Controller
         if($request->hasFile('filepath')){
         $image = $request->file('filepath');
         $imageName = time(). '.' .$image->getClientOriginalExtension();
-        $filePath = public_path('/images');
+        $filePath = public_path('public/images');
         $image->move($filePath,$imageName);
     }
         $activitties = Activitties::create([
-            'user_id'=> 'dicipline_id',
+            'user_id'=> auth()->user()->user_id,
            'dicipline_id' => $request->dicipline,
            'dicipline_id' => $request->name,
            'dicipline_id' => $request->filepath,

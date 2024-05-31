@@ -30,6 +30,11 @@ class AuthController extends Controller
 
         UserRole::create([
             'user_id'=> $user->id,
+            'role_id'=> 1
+        ]);
+
+        UserRole::create([
+            'user_id'=> $user->id,
             'role_id'=> 2
         ]);
 

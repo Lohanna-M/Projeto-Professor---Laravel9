@@ -7,6 +7,7 @@ use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\RegisterActivittiesController;
 use App\Http\Controllers\RegisterAlunoController;
 use App\Http\Controllers\RegisterDisciplinaController;
+use App\Http\Middleware\AdminAccess;
 use App\Models\ActivittiesResponses;
 use Illuminate\Support\Facades\Route;
 
@@ -21,16 +22,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(AuthController::class,)->group(function ()
+Route::controller(AuthController::class)->group(function()
     {
-        Route::get('/register')->name('register');
-        Route::post('/registerSave')->name('register.save');
+        Route::get('/register')->name('register')->middleware('professor', 'admin');
+        Route::post('/registerSave')->name('register.save')->middleware('professor', 'admin');
 
-        Route::get('/','login', '/login',)->name('login');
-        Route::post('/', 'login', '/login.Action',)->name('login.action');
+        Route::get('/','login', '/login',)->name('login')->middleware('professor', 'admin', 'aluno');
+        Route::post('/', 'login', '/login.Action',)->name('login.action')->middleware('professor', 'admin', 'aluno');
     });
 
-Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties');
+Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties')->middleware('professor', 'admin', 'aluno');
 Route::get('/registeractivitties',[ActivittiesController::class, 'create'])->name('RegisterActivitties');
 Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
 Route::post('/registeractivitties/show', [ActivittiesController::class, 'show'])->name('ShowActivitties');
