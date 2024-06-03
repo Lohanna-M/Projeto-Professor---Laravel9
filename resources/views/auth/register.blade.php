@@ -26,14 +26,14 @@
             <span>Senha:</span>
         </label>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="2" id="professor" name="professor">
+            <label class="form-check-label" for="professor">
              Aluno
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">
+            <input class="form-check-input" type="checkbox" value="3" id="aluno" name="professor">
+            <label class="form-check-label" for="aluno">
               Professor
             </label>
           </div>
