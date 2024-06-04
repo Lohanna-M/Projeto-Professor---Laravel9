@@ -9,15 +9,22 @@
     <title>Login</title>
 </head>
 <body>
-<form class="form">
+<form class="form" action="{{ route('login.action') }}" method="POST">
+    @csrf
     <div class="conteiner"> <p class="title">Login</p>
 <label>
     <input class="input" type="email" name="email" required="email">
     <span>Email:</span>
+    @error('email')
+    <span>{{ $message }}</span>
+    @enderror
 </label>
 <label>
     <input class="input" type="password" name="password" required="password">
     <span>Senha:</span>
+    @error('password')
+    <span>{{ $message }}</span>
+    @enderror
 </label>
 <a href="{{ route('Activitties') }}"><button class="submit">Login</button></a>
 <p class="mb-0">Não possui uma conta?<a href="{{ route('register') }}" class="register_button">Registre-se</a></p>

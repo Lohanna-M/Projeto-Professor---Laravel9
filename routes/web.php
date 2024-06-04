@@ -15,17 +15,15 @@ use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 
-Route::controller(AuthController::class, '')->group(function() {
+Route::controller(AuthController::class,)->group(function() {
 
         Route::get('/register', 'register')->name('register');
         Route::post('/registerSave', 'registerSave')->name('register.save');
 
         Route::get('/','login',)->name('login');
-        Route::post('/','login.Action',)->name('login.action');
+        Route::post('/login','loginAction',)->name('login.action');
     });
 
-
-Route::middleware(['admin', 'professor'])->group(function () {
 Route::get('/activitties',[ActivittiesController::class, 'index'])->name('Activitties');
 Route::get('/registeractivitties',[ActivittiesController::class, 'create'])->name('RegisterActivitties');
 Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
@@ -34,7 +32,7 @@ Route::get('/disciplina',[DisciplinaController::class, 'index'])->name('Discipli
 Route::get('/registerdisciplina',[DisciplinaController::class, 'create'])->name('RegisterDisciplina');
 Route::post('/registerdisciplina/store',[DisciplinaController::class, 'store'])->name('StoreDisciplina');
 Route::post('/registerdisciplina/show',[DisciplinaController::class, 'show'])->name('ShowDisciplina');
-});
+
 
 Route::middleware(['admin', 'aluno',])->group(function (){
 Route::get('/activittiesresponses',[ActivittiesResponsesController::class, 'index'])->name('ActivittiesResponses');

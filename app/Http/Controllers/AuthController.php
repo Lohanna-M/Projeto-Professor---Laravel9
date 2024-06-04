@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Auth;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+
 
 class AuthController extends Controller
 {
@@ -18,36 +17,44 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
-             $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:8',
-                'aluno' => 'nullable|boolean',
-                'professor' => 'nullable|boolean',
-            ]);
+        //Validação
+        $request->validate([
+                'name' => 'required|',
+                'email' => 'required|email|',
+                'password' => 'required|',
+        ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ])->givePermissionTo('admin');
-
-        if($user){
-        if ($request->input('professor'))
-        UserRole::create([
-            'user_id'=> $user->id,
-            'role_id'=> 2
         ]);
 
-        if ($request->input('aluno'))
-        UserRole::create([
-            'user_id'=> $user->id,
-            'role_id'=> 3
-        ]);
+        //Selecionar na checkbox se é Professor ou Aluno
+        if ($user) {
+            if ($request->has('professor') && $request->professor) {
+                UserRole::create([
+                    'user_id' => $user->id,
+                    'role_id' => 2,
+                ]);
+            }
+
+            if ($request->has('aluno') && $request->aluno) {
+                UserRole::create([
+                    'user_id' => $user->id,
+                    'role_id' => 3,
+                ]);
+            }
+
+            if(Auth::attempt(['name' => $request->name,'email' => $request->email, 'password' => $request->password])){
+                $request->session()->regenerate();
+                return redirect()->route('login')->with('success', 'Usuário registrado com sucesso!');
         }
-        return redirect()->route('login')->with('success', 'Usuário registrado com sucesso!');
     }
-
+        return back()->withErrors([
+        'error' => 'Ocorreu um erro ao registrar o usuário. Tente novamente.',
+    ]);
+}
     public function login(Request $request)
     {
         return view('auth.login');
@@ -55,14 +62,17 @@ class AuthController extends Controller
 
     public function loginAction(Request $request)
     {
-        if($request){
-
+        //Validação
+        $request->validate([
+            'email' => 'required|email|',
+            'password' => 'required|',
+    ]);
+        //Autenticação
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                 $request->session()->regenerate();
-                return redirect()->route('Activitties');
+                return redirect()->route('Activitties')->with('sucess', 'Login realizado com sucesso!');
             }
             return redirect()->route('login')->with('fail', 'Email e/ou senha inválidos!');
-        }
-        return redirect()->route('login')->with('fail', 'Email e/ou senha inválidos!');
+
     }
 }

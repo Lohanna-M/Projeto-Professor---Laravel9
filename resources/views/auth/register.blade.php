@@ -16,24 +16,33 @@
         <label>
             <input class="input" type="text" name="name" required="name">
             <span>Nome:</span>
+            @error('name')
+            <span>{{ $message }}</span>
+            @enderror
         </label>
         <label>
             <input class="input" type="email" name="email" required="email">
             <span>Email:</span>
+            @error('email')
+            <span>{{ $message }}</span>
+            @enderror
         </label>
         <label>
             <input class="input" type="password" name="password" required="password">
             <span>Senha:</span>
+            @error('password')
+            <span>{{ $message }}</span>
+            @enderror
         </label>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="2" id="professor" name="professor">
-            <label class="form-check-label" for="professor">
+            <input class="form-check-input" type="checkbox" value="3" id="aluno" name="aluno">
+            <label class="form-check-label" for="aluno">
              Aluno
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="3" id="aluno" name="professor">
-            <label class="form-check-label" for="aluno">
+            <input class="form-check-input" type="checkbox" value="2" id="professor" name="professor">
+            <label class="form-check-label" for="professor">
               Professor
             </label>
           </div>
