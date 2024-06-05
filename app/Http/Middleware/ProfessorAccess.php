@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,17 @@ class ProfessorAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->professor == 2){
+        $user=User::with('userRole')->find(Auth::user()->id);
+        if(!isset($user->userRole)){
+            return redirect('/')->with('error','Acesso negado');
+        }
+        if(Auth::check() && $user->userRole->role_id == 2){
             return $next($request);
         }else{
             if(!Auth::check()){
                 return redirect('/login');
             }
-            dd("Você não tem acesso.");
+            return redirect('/')->with('error','Acesso negado');
         }
     }
 }

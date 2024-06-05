@@ -31,7 +31,16 @@ class AuthController extends Controller
         ]);
 
         //Selecionar na checkbox se é Professor ou Aluno
+
         if ($user) {
+
+            if ($request->has('admin') && $request->admin) {
+                UserRole::create([
+                    'user_id' => $user->id,
+                    'role_id' => 1,
+                ]);
+            }
+
             if ($request->has('professor') && $request->professor) {
                 UserRole::create([
                     'user_id' => $user->id,
