@@ -32,6 +32,7 @@
             <ul class="dropdown-menu conta">
                 <li><a class="dropdown-item" href="#">Ver Detalhes da Conta</a></li>
                 <li><a class="dropdown-item" href="#">Atualizar Detalhes da Conta</a></li>
+                <li><a class="dropdown-item" href="#">Sair</a></li>
             </ul>
         </div>
     </nav>

@@ -20,7 +20,6 @@ class AuthUser
         if(!Auth::check()){
             return redirect()->route('login');
         }
-
-        return redirect()->route('Activitties');
+        return $next($request);
     }
 }

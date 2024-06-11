@@ -40,16 +40,16 @@
               Admin
             </label>
           </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="3" id="aluno" name="aluno">
-            <label class="form-check-label" for="aluno">
-             Aluno
-            </label>
-          </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="2" id="professor" name="professor">
             <label class="form-check-label" for="professor">
               Professor
+            </label>
+         </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="3" id="aluno" name="aluno">
+            <label class="form-check-label" for="aluno">
+             Aluno
             </label>
           </div>
         <a href="{{ route('login') }}"><button class="submit">Registre-se</button></a>

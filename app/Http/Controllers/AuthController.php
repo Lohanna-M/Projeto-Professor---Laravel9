@@ -75,13 +75,17 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|',
             'password' => 'required|',
-    ]);
+        ]);
         //Autenticação
-            if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                $request->session()->regenerate();
-                return redirect()->route('Activitties')->with('sucess', 'Login realizado com sucesso!');
-            }
-            return redirect()->route('login')->with('fail', 'Email e/ou senha inválidos!');
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $request->session()->regenerate();
 
+            if(Auth::user()->userRole->role_id == 3){
+                return redirect()->route('ActivittiesResponses')->with('success', 'Login realizado com sucesso!');
+            }else{
+                return redirect()->route('Activitties')->with('success', 'Login realizado com sucesso!');
+            }
+        }
+        return redirect()->route('login')->with('fail', 'Email e/ou senha inválidos!');
     }
 }

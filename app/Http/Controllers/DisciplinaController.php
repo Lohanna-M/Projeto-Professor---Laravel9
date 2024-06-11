@@ -19,15 +19,18 @@ class DisciplinaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|',
+        ]);
+
         Discipline::create([
             'name'=> $request->name
          ]);
-         return redirect('disciplina');
+         return redirect()->route('Disciplina')->with('success', 'Disciplina adicionada');
     }
 
     public function show($id){
         $disciplines = Discipline::find($id);
-        return view('disciplina')->with('disciplina', $disciplines);
-
+        return redirect()->route('Disciplina')->with('disciplina', $disciplines);
     }
 }
