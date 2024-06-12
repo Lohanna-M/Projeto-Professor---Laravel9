@@ -24,39 +24,81 @@ class ActivittiesController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'dicipline' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'required|string|max:1000',
+        ]);
+
         if($request->hasFile('filepath')){
         $image = $request->file('filepath');
         $imageName = time(). '.' .$image->getClientOriginalExtension();
         $filePath = public_path('public/images');
         $image->move($filePath,$imageName);
-    }
+        $validatedData['filepath'] = 'images/' . $imageName;
+        }
+        else{
+            $validatedData['filepath'] = null;
+        }
+
         $activitties = Activitties::create([
-            'user_id'=> auth()->user()->user_id,
-           'dicipline_id' => $request->dicipline,
-           'dicipline_id' => $request->name,
-           'dicipline_id' => $request->filepath,
-           'dicipline_id' => $request->description,
+            'user_id' => auth()->user()->id,
+            'dicipline_id' => $validatedData['dicipline'],
+            'name' => $validatedData['name'],
+            'filepath' => $validatedData['filepath'],
+            'description' => $validatedData['description'],
         ]);
-        return redirect('activitties')->with('flash message', 'Atividade Criada!');
+
+        return redirect()->route('activitties')->with('flash message', 'Atividade Criada!');
+
     }
 
-
-    public function show($user_id)
+    public function show($id)
     {
-        $activitties = Activitties::find($user_id);
-        return view('activitties')->with('activitties', $activitties);
+        $activitties = Activitties::where('user_id', $id)->get();
+        return view('activitties', compact('activitties'));
+    }
+
+    public function edit($id)
+    {
+        $activitties = Activitties::findOrFail($id);
+        $diciplines = Discipline::all();
+        return view('activitties.edit', compact('activitties', 'discipline'));
     }
 
     public function update(Activitties $activitties, Request $request)
     {
-        $input = $request->validated();
+        $validatedData = $request->validate([
+            'dicipline' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'required|string|max:1000',
+        ]);
 
-        if (!empty($input['filepath']) && $input['filepath']->isValid()){
-           Storage::delete($activitties->filepath ?? '');
-           $file = $input['filepath'];
-           $path = $file->store('public/activitties');
-           $input['filepath'] = $path;
-       }
+
+        if($request->hasFile('filepath') && $request->file('filepath')->isValid()){
+            Storage::delete($activitties->filepath);
+            $file = $request->file('filepath');
+            $path = $file->store('public/activitties');
+            $validatedData['filepath'] = $path;
+        }
+            else{
+                unset($validatedData['filepath']);
+            }
+
+        $activitties->update($validatedData);
+
+        return redirect()->route('activitties')->with('flash_message', 'Atividade Atualizada');
     }
+        public function destroy($id)
+        {
+            $activitties = Activitties::findOrFail($id);
+            Storage::delete($activitties->filepath);
+            $activitties->delete();
+
+            return redirect()->route('activitties.index')->with('flash_message', 'Atividade Deletada!');
+        }
+
 }
 

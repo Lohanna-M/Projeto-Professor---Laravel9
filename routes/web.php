@@ -31,13 +31,20 @@ Route::middleware(['aluno'])->group(function(){
 
 Route::middleware(['professor'])->group(function(){
     Route::get('/activitties', [ActivittiesController::class, 'index'])->name('Activitties');
+    Route::get('/activitties/create', [ActivittiesController::class, 'create'])->name('CreateActivitties');
+    Route::post('/activitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
+    Route::get('/activitties/{id}/edit', [ActivittiesController::class, 'edit'])->name('EditActivitties');
+    Route::get('/activitties/{id}/delete', [ActivittiesController::class, 'destroy'])->name('DeleteActivitties');
+
     Route::get('/registeractivitties', [ActivittiesController::class, 'create'])->name('RegisterActivitties');
-    Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
-    Route::post('/registeractivitties/show', [ActivittiesController::class, 'show'])->name('ShowActivitties');
+    Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('RegisterStore');
+    Route::post('/registeractivitties/show', [ActivittiesController::class, 'show'])->name('RegisterShow');
+
     Route::get('/disciplina', [DisciplinaController::class, 'index'])->name('Disciplina');
     Route::get('/registerdisciplina', [DisciplinaController::class, 'create'])->name('RegisterDisciplina');
     Route::post('/registerdisciplina/store', [DisciplinaController::class, 'store'])->name('StoreDisciplina');
     Route::post('/registerdisciplina/show', [DisciplinaController::class, 'show'])->name('ShowDisciplina');
+
     Route::get('/aluno', [ActivittiesController::class, 'index'])->name('Aluno');
     Route::get('/registeraluno', [RegisterAlunoController::class, 'index'])->name('RegisterAluno');
 });

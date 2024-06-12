@@ -12,39 +12,33 @@
     <title>Activitties</title>
 </head>
 <body>
-    <form class="form" action="{{ route('StoreActivitties') }}" method="POST">
+    <div class="conteiner">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="selectAll">
-                            <label for="selectAll"></label>
-                        </span>
-                    </th>
-                    <th>Atividade</th>
+                    <th>Nome da Atividade</th>
                     <th>Disciplina</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                            <label for="checkbox1"></label>
-                        </span>
-                    </td>
-                    <td>Atividade</td>
-                    <td>Português</td>
-                    <td>
-                        <a href="" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
-                        <a href="" button type="button" class="btn btn-success   btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
-                        <a href="" button type="button" class="btn btn-danger  btn-rounded" data-mdb-ripple-init>Deletar Atividade</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <tbody>
+            @foreach ($activitties as $activity)
+            <tr>
+                <td>{{ $activity->name }}</td>
+                <td>{{ $activity->dicipline->name}}</td>
+                <td>{{ $activity->description }}</td>
+                <td>
+                    <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
+                    <a href="{{ route('EditActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                    <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-primary btn-rounded">Deletar Atividade</button>
+            </tr>
+            @endforeach
     </form>
+    </div>
     </body>
     @endsection
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

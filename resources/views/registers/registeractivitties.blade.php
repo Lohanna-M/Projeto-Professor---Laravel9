@@ -11,10 +11,11 @@
 </head>
 <body>
     <form action="{{ route('StoreActivitties') }}" method="POST" enctype="multipart/form-data" class="form">
+        <div class="conteiner">
+        <p class="title">Registrar Atividade</p>
         @csrf
-       <div class="conteiner"> <p class="title">Registrar Atividade</p>
         <label>
-            <input class="input" type="text" placeholder="" name="name" required="name">
+            <input class="input" type="text" id='name' name="name" required="name">
             <span>Atividade:</span>
         </label>
         <label>
@@ -26,9 +27,10 @@
         </label>
         <input type="file"name="filepath">
 
-        <label>Descrição da Atividade:</label>
+        <label type=filepath id="description" name="description" >Descrição da Atividade:</label>
         <textarea placeholder="Escreva aqui"></textarea>
         <button class="submit">Registrar</button>
+
        </div>
     </form>
 </body>
