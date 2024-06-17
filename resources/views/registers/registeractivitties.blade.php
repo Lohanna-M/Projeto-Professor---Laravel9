@@ -27,8 +27,8 @@
         </label>
         <input type="file"name="filepath">
 
-        <label type=filepath id="description" name="description" >Descrição da Atividade:</label>
-        <textarea placeholder="Escreva aqui"></textarea>
+        <label type=filepath id="description"  >Descrição da Atividade:</label>
+        <textarea placeholder="Escreva aqui" name="description"></textarea>
         <button class="submit">Registrar</button>
 
        </div>

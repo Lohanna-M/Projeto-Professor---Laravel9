@@ -32,6 +32,7 @@ Route::middleware(['aluno'])->group(function(){
 Route::middleware(['professor'])->group(function(){
     Route::get('/activitties', [ActivittiesController::class, 'index'])->name('Activitties');
     Route::get('/activitties/create', [ActivittiesController::class, 'create'])->name('CreateActivitties');
+    Route::get('/activitties/{id}', [ActivittiesController::class, 'show'])->name('ShowActivitties');
     Route::post('/activitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
     Route::get('/activitties/{id}/edit', [ActivittiesController::class, 'edit'])->name('EditActivitties');
     Route::get('/activitties/{id}/delete', [ActivittiesController::class, 'destroy'])->name('DeleteActivitties');

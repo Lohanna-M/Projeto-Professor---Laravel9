@@ -11,7 +11,7 @@ class Activitties extends Model
     protected $table = 'activitties';
 
     protected $fillable = [
-        'name', 'filepath', 'description', 'note', 'check',
+        'name', 'filepath', 'description', 'note', 'check', 'dicipline_id', 'user_id',
     ];
 
     /**

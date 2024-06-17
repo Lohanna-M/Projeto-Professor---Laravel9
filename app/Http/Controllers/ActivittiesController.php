@@ -12,7 +12,7 @@ class ActivittiesController extends Controller
 {
     public function index ()
     {
-        $activitties = Activitties::all();
+        $activitties = Activitties::with('diciplines')->get();
         return view('activitties')->with('activitties', $activitties);
     }
 
@@ -24,47 +24,52 @@ class ActivittiesController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'dicipline' => 'required|integer',
-            'name' => 'required|string|max:255',
-            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-            'description' => 'required|string|max:1000',
-        ]);
 
-        if($request->hasFile('filepath')){
-        $image = $request->file('filepath');
-        $imageName = time(). '.' .$image->getClientOriginalExtension();
-        $filePath = public_path('public/images');
-        $image->move($filePath,$imageName);
-        $validatedData['filepath'] = 'images/' . $imageName;
+        try {
+            $validatedData = $request->validate([
+                'disciplina' => 'required|integer',
+                'name' => 'required|string|max:255',
+                'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+                'description' => 'required|string|max:1000',
+            ]);
+
+            if($request->hasFile('filepath')){
+            $image = $request->file('filepath');
+            $imageName = time(). '.' .$image->getClientOriginalExtension();
+            $filePath = public_path('public/images');
+            $image->move($filePath,$imageName);
+            $validatedData['filepath'] = 'images/' . $imageName;
+            }
+            else{
+                $validatedData['filepath'] = null;
+            }
+            $activitties = Activitties::create([
+                'user_id' => auth()->user()->id,
+                'dicipline_id' => $validatedData['disciplina'],
+                'name' => $validatedData['name'],
+                'filepath' => $validatedData['filepath'],
+                'description' => $validatedData['description'],
+            ]);
+
+            return redirect()->route('Activitties')->with('flash message', 'Atividade Criada!');
+        } catch (\Exception $ex) {
+           dd($ex->getMessage());
         }
-        else{
-            $validatedData['filepath'] = null;
-        }
-
-        $activitties = Activitties::create([
-            'user_id' => auth()->user()->id,
-            'dicipline_id' => $validatedData['dicipline'],
-            'name' => $validatedData['name'],
-            'filepath' => $validatedData['filepath'],
-            'description' => $validatedData['description'],
-        ]);
-
-        return redirect()->route('activitties')->with('flash message', 'Atividade Criada!');
 
     }
 
     public function show($id)
     {
-        $activitties = Activitties::where('user_id', $id)->get();
-        return view('activitties', compact('activitties'));
+        $activity = Activitties::where('id', $id)->first();
+        return view('activittiesshow', compact('activity'));
+
     }
 
     public function edit($id)
     {
         $activitties = Activitties::findOrFail($id);
         $diciplines = Discipline::all();
-        return view('activitties.edit', compact('activitties', 'discipline'));
+        return view('activittiesedit');
     }
 
     public function update(Activitties $activitties, Request $request)
@@ -97,7 +102,7 @@ class ActivittiesController extends Controller
             Storage::delete($activitties->filepath);
             $activitties->delete();
 
-            return redirect()->route('activitties.index')->with('flash_message', 'Atividade Deletada!');
+            return redirect()->route('activitties')->with('flash_message', 'Atividade Deletada!');
         }
 
 }

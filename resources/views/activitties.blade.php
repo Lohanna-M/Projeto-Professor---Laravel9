@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/activitties.css">
-    <title>Activitties</title>
+    <title>Atividades</title>
 </head>
 <body>
     <div class="conteiner">
@@ -19,22 +19,20 @@
                     <th>Nome da Atividade</th>
                     <th>Disciplina</th>
                     <th>Descrição</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
         <tbody>
             @foreach ($activitties as $activity)
             <tr>
                 <td>{{ $activity->name }}</td>
-                <td>{{ $activity->dicipline->name}}</td>
-                <td>{{ $activity->description }}</td>
+                <td>{{ $activity->diciplines->name}}</td>
                 <td>
-                    <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
+                    <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
                     <a href="{{ route('EditActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
                     <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-primary btn-rounded">Deletar Atividade</button>
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
             </tr>
             @endforeach
     </form>
