@@ -24,8 +24,6 @@ class ActivittiesController extends Controller
 
     public function store(Request $request)
     {
-
-        try {
             $validatedData = $request->validate([
                 'disciplina' => 'required|integer',
                 'name' => 'required|string|max:255',
@@ -51,10 +49,7 @@ class ActivittiesController extends Controller
                 'description' => $validatedData['description'],
             ]);
 
-            return redirect()->route('Activitties')->with('flash message', 'Atividade Criada!');
-        } catch (\Exception $ex) {
-           dd($ex->getMessage());
-        }
+            return redirect()->route('Activitties', 'ActivittiesResponses')->with('flash message', 'Atividade Criada!');
 
     }
 
@@ -67,42 +62,44 @@ class ActivittiesController extends Controller
 
     public function edit($id)
     {
-        $activitties = Activitties::findOrFail($id);
+        $activity = Activitties::findOrFail($id);
         $diciplines = Discipline::all();
-        return view('activittiesedit');
+        return view('activittiesedit', compact('activity', 'diciplines'));
     }
 
-    public function update(Activitties $activitties, Request $request)
+    public function update(Request $request, $id)
     {
+        $activitties = Activitties::findOrFail($id);
+
         $validatedData = $request->validate([
-            'dicipline' => 'required|integer',
-            'name' => 'required|string|max:255',
-            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-            'description' => 'required|string|max:1000',
+             'disciplina' => 'required|integer',
+                'name' => 'required|string|max:255',
+                'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+                'description' => 'required|string|max:1000',
         ]);
 
-
-        if($request->hasFile('filepath') && $request->file('filepath')->isValid()){
-            Storage::delete($activitties->filepath);
-            $file = $request->file('filepath');
-            $path = $file->store('public/activitties');
-            $validatedData['filepath'] = $path;
-        }
-            else{
-                unset($validatedData['filepath']);
+        if($request->hasFile('filepath')){
+            $image = $request->file('filepath');
+            $imageName = time(). '.' .$image->getClientOriginalExtension();
+            $filePath = public_path('public/images');
+            $image->move($filePath,$imageName);
+            $validatedData['filepath'] = 'images/' . $imageName;
             }
-
+            else{
+                $validatedData['filepath'] = null;
+            }
         $activitties->update($validatedData);
 
-        return redirect()->route('activitties')->with('flash_message', 'Atividade Atualizada');
+        return redirect()->route('Activitties')->with('flash_message', 'Atividade Atualizada');
     }
+
         public function destroy($id)
         {
-            $activitties = Activitties::findOrFail($id);
-            Storage::delete($activitties->filepath);
-            $activitties->delete();
+            $activity = Activitties::findOrFail($id);
+            unlink(public_path('public/'.$activity->filepath));
+            $activity->delete();
 
-            return redirect()->route('activitties')->with('flash_message', 'Atividade Deletada!');
+            return redirect()->route('Activitties')->with('flash_message', 'Atividade Deletada!');
         }
 
 }

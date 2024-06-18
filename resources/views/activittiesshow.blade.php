@@ -18,8 +18,8 @@
     <div class="card" style="width: 40rem; margin: 10rem;">
         <img src="{{asset('public/'.$activity->filepath)}}" alt="{{ $activity->name }}" class="img-fluid">
         <div class="card-body">
-          <h5 class="card-title">{{$activity->name}} </h5>
-          <p class="card-text"> Descrição:{{$activity->description}}</p>
+          <h3 class="card-title">{{$activity->name}}</h3>
+          <p class="card-text">Descrição: {{$activity->description}}</p>
         </div>
       </div>
     @endif

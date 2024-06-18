@@ -1,3 +1,5 @@
+@extends('layouts.default')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,56 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/activitties.css">
-    <title>Document</title>
+    <title>Atividades</title>
 </head>
 <body>
-
-    <nav class="navbar">
-              </ul>
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  Conta
-              </button>
-              <ul class="dropdown-menu conta">
-                  <li><a class="dropdown-item" href="#">Ver Detalhes da Conta</a></li>
-              </ul>
-          </div>
-      </nav>
-    </div>
+    <div class="conteiner">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="selectAll">
-                            <label for="selectAll"></label>
-                        </span>
-                    </th>
-                    <th>Atividade</th>
+                    <th>Nome da Atividade</th>
                     <th>Disciplina</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                            <label for="checkbox1"></label>
-                        </span>
-                    </td>
-                    <td>Atividade</td>
-                    <td>Português</td>
-                    <td>
-                        <a href="{{ route('Responses') }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Responder Atividade</a>
-                        <a href="" button type="button" class="btn btn-success   btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <tbody>
+            @foreach ($activitties as $activity)
+            <tr>
+                <td>{{ $activity->name }}</td>
+                <td>{{ $activity->diciplines->name}}</td>
+                <td>
+                    <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
+                    <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
+                    <a href="{{ route('EditActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
+            </tr>
+            @endforeach
+    </form>
+    </div>
     </body>
+    @endsection
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</html>
-</body>
 </html>

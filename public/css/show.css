@@ -83,3 +83,8 @@ body {
   .card-text{
     color: #212121;
   }
+
+  .card{
+  border: #094701 solid 10px;
+  border-radius: 10px;
+  }

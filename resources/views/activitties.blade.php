@@ -18,7 +18,6 @@
                 <tr>
                     <th>Nome da Atividade</th>
                     <th>Disciplina</th>
-                    <th>Descrição</th>
                 </tr>
             </thead>
         <tbody>
@@ -27,9 +26,9 @@
                 <td>{{ $activity->name }}</td>
                 <td>{{ $activity->diciplines->name}}</td>
                 <td>
+                    <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
                     <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
                     <a href="{{ route('EditActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
-                    <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>

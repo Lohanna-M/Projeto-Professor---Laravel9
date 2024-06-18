@@ -35,7 +35,9 @@ Route::middleware(['professor'])->group(function(){
     Route::get('/activitties/{id}', [ActivittiesController::class, 'show'])->name('ShowActivitties');
     Route::post('/activitties/store', [ActivittiesController::class, 'store'])->name('StoreActivitties');
     Route::get('/activitties/{id}/edit', [ActivittiesController::class, 'edit'])->name('EditActivitties');
-    Route::get('/activitties/{id}/delete', [ActivittiesController::class, 'destroy'])->name('DeleteActivitties');
+    Route::put('/activitties/{id}', [ActivittiesController::class, 'update'])->name('UpdateActivitties');
+    Route::delete('/activitties/{id}', [ActivittiesController::class, 'destroy'])->name('DeleteActivitties');
+    
 
     Route::get('/registeractivitties', [ActivittiesController::class, 'create'])->name('RegisterActivitties');
     Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('RegisterStore');
