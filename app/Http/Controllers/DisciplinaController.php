@@ -8,8 +8,8 @@ class DisciplinaController extends Controller
 {
     public function index ()
     {
-        $disciplines = Discipline::all();
-        return view('disciplina')->with('discipline', $disciplines);
+        $disciplines = Discipline::orderBy('updated_at', 'desc')->get();
+        return view('disciplina')->with('disciplines', $disciplines);
     }
 
     public function create()
@@ -29,8 +29,26 @@ class DisciplinaController extends Controller
          return redirect()->route('Disciplina')->with('success', 'Disciplina adicionada');
     }
 
-    public function show($id){
-        $disciplines = Discipline::find($id);
-        return redirect()->route('Disciplina')->with('disciplina', $disciplines);
+    public function edit($id){
+        $dicipline = Discipline::findOrFail($id);
+        return view('disciplinaedit', compact('dicipline'));
     }
+
+    public function update(Request $request, $id){
+        $disciplines = Discipline::findOrFail($id);
+        $request->validate([
+            'name' => 'required|',
+        ]);
+
+        $disciplines->update($request->only('name'));
+        return redirect()->route('Disciplina')->with('success', 'Disciplina atualizada');
+    }
+
+    public function destroy($id)
+    {
+        $dicipline = Discipline::findOrFail($id);
+        $dicipline->delete();
+        return redirect()->route('Disciplina')->with('fail', 'Atividade Deletada!');
+    }
+
 }

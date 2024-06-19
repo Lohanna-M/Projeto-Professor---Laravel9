@@ -37,13 +37,15 @@ Route::middleware(['professor'])->group(function(){
     Route::get('/activitties/{id}/edit', [ActivittiesController::class, 'edit'])->name('EditActivitties');
     Route::put('/activitties/{id}', [ActivittiesController::class, 'update'])->name('UpdateActivitties');
     Route::delete('/activitties/{id}', [ActivittiesController::class, 'destroy'])->name('DeleteActivitties');
-    
 
     Route::get('/registeractivitties', [ActivittiesController::class, 'create'])->name('RegisterActivitties');
     Route::post('/registeractivitties/store', [ActivittiesController::class, 'store'])->name('RegisterStore');
     Route::post('/registeractivitties/show', [ActivittiesController::class, 'show'])->name('RegisterShow');
 
     Route::get('/disciplina', [DisciplinaController::class, 'index'])->name('Disciplina');
+    Route::get('/disciplina/{id}/edit', [DisciplinaController::class, 'edit'])->name('EditDisciplina');
+    Route::put('/disciplina/{id}', [DisciplinaController::class, 'update'])->name('UpdateDisciplina');
+    Route::delete('/disciplina/{id}', [DisciplinaController::class, 'destroy'])->name('DeleteDisciplina');
     Route::get('/registerdisciplina', [DisciplinaController::class, 'create'])->name('RegisterDisciplina');
     Route::post('/registerdisciplina/store', [DisciplinaController::class, 'store'])->name('StoreDisciplina');
     Route::post('/registerdisciplina/show', [DisciplinaController::class, 'show'])->name('ShowDisciplina');

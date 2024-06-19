@@ -12,21 +12,32 @@
     <body>
         @extends('layouts.default')
         @section('content')
-        <div class="container">
-            @if (@session('success'))
-           <div class="alert alert-sucess">
-            {{ session('success') }}
+        <div class="conteiner">
+            @if(Session::has('success'))
+        <div class="alert alert-success">
+        {{Session::get('success')}}
+        </div>
+            @elseif(Session::has('fail'))
+        <div class="alert alert-danger">
+        {{Session::get('fail')}}
+        </div>
         @endif
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Disciplinas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($diciplines as $dicipline)
+                    @foreach ($disciplines as $dicipline)
                     <tr>
-                        <td>{{ $discipline->nome }}</td>
+                        <td>{{ $dicipline->name }}</td>
+                        <td>
+                            <form class="form" action="{{ route('DeleteDisciplina', $dicipline->id) }}" method="POST">
+                            <a href="{{ route('EditDisciplina', $dicipline->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
                     </tr>
                     @endforeach
             </table>

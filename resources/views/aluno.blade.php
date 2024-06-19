@@ -4,68 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Alunos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/activitties.css">
+    <title>Aluno</title>
 </head>
-<body>
-    @extends('layouts.default')
-    @section('content')
-    </div>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>
-                    <span class="custom-checkbox">
-                        <input type="checkbox" id="selectAll">
-                        <label for="selectAll"></label>
-                    </span>
-                </th>
-                <th>Aluno</th>
-                <th>Atividade</th>
-                <th>Disciplina</th>
-                <th>Nota</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <span class="custom-checkbox">
-                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                        <label for="checkbox1"></label>
-                    </span>
-                </td>
-                <td>Thomas Hardy</td>
-                <td>Atividade</td>
-                <td>Português</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="custom-checkbox">
-                        <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                        <label for="checkbox2"></label>
-                    </span>
-
-                </td>
-                <td>Dominique Perrier</td>
-                <td>Atividade</td>
-                <td>Matemática</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="custom-checkbox">
-                        <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                        <label for="checkbox3"></label>
-                    </span>
-                </td>
-                <td>Maria Anders</td>
-                <td>Atividade</td>
-                <td>Biologia</td>
-                <td>8.5</td>
-            </tr>
-        </tbody>
-    </table>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-@endsection
+    <body>
+        @extends('layouts.default')
+        @section('content')
+        <div class="container">
+            @if(Session::has('success'))
+        <div class="alert alert-success">
+        {{Session::get('success')}}
+        </div>
+            @elseif(Session::has('fail'))
+        <div class="alert alert-danger">
+        {{Session::get('fail')}}
+        </div>
+        @endif
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Disciplinas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($disciplines as $dicipline)
+                    <tr>
+                        <td>{{ $dicipline->name }}</td>
+                        <td>
+                            <form class="form" action="{{ route('DeleteDisciplina', $dicipline->id) }}" method="POST">
+                            <a href="{{ route('EditDisciplina', $dicipline->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
+                    </tr>
+                    @endforeach
+            </table>
+           </div>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    @endsection
 </html>

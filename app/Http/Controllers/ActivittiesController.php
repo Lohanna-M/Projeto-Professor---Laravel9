@@ -49,7 +49,7 @@ class ActivittiesController extends Controller
                 'description' => $validatedData['description'],
             ]);
 
-            return redirect()->route('Activitties', 'ActivittiesResponses')->with('flash message', 'Atividade Criada!');
+            return redirect()->route('Activitties', 'ActivittiesResponses')->with('success', 'Atividade Criada!');
 
     }
 
@@ -90,7 +90,7 @@ class ActivittiesController extends Controller
             }
         $activitties->update($validatedData);
 
-        return redirect()->route('Activitties')->with('flash_message', 'Atividade Atualizada');
+        return redirect()->route('Activitties')->with('success', 'Atividade Atualizada');
     }
 
         public function destroy($id)
@@ -99,7 +99,7 @@ class ActivittiesController extends Controller
             unlink(public_path('public/'.$activity->filepath));
             $activity->delete();
 
-            return redirect()->route('Activitties')->with('flash_message', 'Atividade Deletada!');
+            return redirect()->route('Activitties')->with('fail', 'Atividade Deletada!');
         }
 
 }
