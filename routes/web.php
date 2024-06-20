@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivittiesController;
 use App\Http\Controllers\ActivittiesResponsesController;
+use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ControledeatividadesController;
 use App\Http\Controllers\DisciplinaController;
@@ -46,10 +47,13 @@ Route::middleware(['professor'])->group(function(){
     Route::get('/disciplina/{id}/edit', [DisciplinaController::class, 'edit'])->name('EditDisciplina');
     Route::put('/disciplina/{id}', [DisciplinaController::class, 'update'])->name('UpdateDisciplina');
     Route::delete('/disciplina/{id}', [DisciplinaController::class, 'destroy'])->name('DeleteDisciplina');
+
     Route::get('/registerdisciplina', [DisciplinaController::class, 'create'])->name('RegisterDisciplina');
     Route::post('/registerdisciplina/store', [DisciplinaController::class, 'store'])->name('StoreDisciplina');
     Route::post('/registerdisciplina/show', [DisciplinaController::class, 'show'])->name('ShowDisciplina');
 
-    Route::get('/aluno', [ActivittiesController::class, 'index'])->name('Aluno');
-    Route::get('/registeraluno', [RegisterAlunoController::class, 'index'])->name('RegisterAluno');
+    Route::get('/aluno/role/1', [AlunoController::class, 'index'])->name('Aluno');
+    Route::get('/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('EditAluno');
+    Route::put('/aluno/{id}', [AlunoController::class, 'update'])->name('UpdateAluno');
+    Route::delete('/disciplina/{id}', [DisciplinaController::class, 'destroy'])->name('DeleteDisciplina');
 });

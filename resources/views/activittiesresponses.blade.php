@@ -1,5 +1,3 @@
-@extends('layouts.default')
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +10,17 @@
     <title>Atividades</title>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Conta
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Ver Detalhes da Conta</a></li>
+              </ul>
+        </div>
+    </nav>
     <div class="conteiner">
         <table class="table table-striped table-hover">
             <thead>
@@ -21,22 +30,8 @@
                 </tr>
             </thead>
         <tbody>
-            @foreach ($activitties as $activity)
-            <tr>
-                <td>{{ $activity->name }}</td>
-                <td>{{ $activity->diciplines->name}}</td>
-                <td>
-                    <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
-                    <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
-                    <a href="{{ route('EditActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
-            </tr>
-            @endforeach
     </form>
     </div>
     </body>
-    @endsection
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

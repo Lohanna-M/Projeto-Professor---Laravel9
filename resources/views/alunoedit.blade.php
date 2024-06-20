@@ -6,22 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/registers.css">
+    <link rel="stylesheet" href={{asset('css/registers.css')}}>
     <title>Registrar Disciplina</title>
 </head>
 <body>
-    <form class="form">
-       <div class="conteiner"> <p class="title">Registrar Aluno</p>
+    <form action="{{ route('UpdateAluno', $user->id) }}" method="POST" class="form">
+        @csrf
+        @method('PUT')
+       <div class="conteiner"> <p class="title">Editar Aluno</p>
         <label>
-            <input class="input" type="name" placeholder="" required="name">
-            <span>Nome do Aluno:</span>
+            <input class="input" name="name" type="name" placeholder="" required="name">
+            <span>{{$user->name}}</span>
         </label>
         <label>
-            <input class="input" type="email" placeholder="" required="email">
-            <span>Email:</span>
+            <input class="input" name="email" type="email" placeholder="" required="email">
+            <span>{{$user->email}}</span>
         </label>
-
-        <button class="submit">Registrar</button>
+        <label>
+            <input class="input" name="password" type="password" placeholder="" required="password">
+            <span>{{$user->password}}</span>
+        </label>
+        <button class="submit">Editar</button>
        </div>
     </form>
 </body>

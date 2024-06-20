@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/activitties.css">
-    <title>Aluno</title>
+    <link rel="stylesheet" href={{asset('css/activitties.css')}}>
+    <title>Disciplinas</title>
 </head>
     <body>
         @extends('layouts.default')
         @section('content')
-        <div class="container">
+        <div class="conteiner">
             @if(Session::has('success'))
         <div class="alert alert-success">
         {{Session::get('success')}}
@@ -22,23 +22,21 @@
         {{Session::get('fail')}}
         </div>
         @endif
-            <table class="table">
+            <table class="table table-striped table-hover ">
                 <thead>
                     <tr>
-                        <th>Disciplinas</th>
+                        <th>Alunos</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($disciplines as $dicipline)
+                    @foreach ($users as $user)
                     <tr>
-                        <td>{{ $dicipline->name }}</td>
-                        <td>
-                            <form class="form" action="{{ route('DeleteDisciplina', $dicipline->id) }}" method="POST">
-                            <a href="{{ route('EditDisciplina', $dicipline->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
-                    </tr>
+                        <td>{{ $user->name }}</td>
+                    <td>
+                        <a href="{{ route('EditAluno', $user->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                        @csrf
+                    </td>
+                </tr>
                     @endforeach
             </table>
            </div>

@@ -22,7 +22,7 @@
         {{Session::get('fail')}}
         </div>
         @endif
-            <table class="table">
+            <table class="table table-striped table-hover ">
                 <thead>
                     <tr>
                         <th>Disciplinas</th>
@@ -38,8 +38,10 @@
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
+                        </td>
                     </tr>
                     @endforeach
+                </form>
             </table>
            </div>
         </div>
