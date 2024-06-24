@@ -33,7 +33,15 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                     <td>
-                        <a href="{{ route('EditAluno', $user->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
+                        <a href="{{ route('EditAluno', $user->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Aluno</a>
+                        <form action="{{ route('DesativarAluno', $user->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Desativar Aluno</label>
+                              </div>
+                        </form>
                         @csrf
                     </td>
                 </tr>

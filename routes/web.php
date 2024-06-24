@@ -55,5 +55,6 @@ Route::middleware(['professor'])->group(function(){
     Route::get('/aluno/role/1', [AlunoController::class, 'index'])->name('Aluno');
     Route::get('/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('EditAluno');
     Route::put('/aluno/{id}', [AlunoController::class, 'update'])->name('UpdateAluno');
-    Route::delete('/disciplina/{id}', [DisciplinaController::class, 'destroy'])->name('DeleteDisciplina');
+    Route::put('/aluno/desativar/{id}', [AlunoController::class, 'desativar'])->name('DesativarAluno');
+
 });

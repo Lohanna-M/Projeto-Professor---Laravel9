@@ -38,9 +38,20 @@ class AlunoController extends Controller
 
     $user->save();
 
-    return redirect()->route('Aluno')->with('success', 'Usuário atualizado com sucesso.');
+    return redirect()->route('Aluno')->with('success', 'Aluno atualizado com sucesso.');
+    }
+
+    public function desativar($id)
+    {
+        $user = User::find($id);
+        
+        if ($user && $user->role_id == 3){
+        $user->role_id = 4;
+        $user->save();
+
+        return redirect()->route('Aluno')->with('success', 'Aluno desativado com sucesso.');
+    }
+
 }
-
-
 }
 
