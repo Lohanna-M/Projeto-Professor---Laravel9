@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activitties;
+use App\Models\ActivittiesResponses;
 use App\Models\Discipline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,8 +50,45 @@ class ActivittiesController extends Controller
                 'description' => $validatedData['description'],
             ]);
 
-            return redirect()->route('Activitties', 'ActivittiesResponses')->with('success', 'Atividade Criada!');
+            return redirect()->route('Activitties')->with('success', 'Atividade Criada!');
 
+    }
+
+    public function showResponses($id){
+        $activity = Activitties::findOrFail($id);
+        $responses = ActivittiesResponses::where('activity_id', $id)->get();
+        return view('activittiesresponses',compact('activity', 'responses'));
+    }
+
+    public function storeResponses(Request $request, $activityId)
+    {
+        $validatedData = $request->validate([
+            'check' => 'required|integer',
+            'note' => 'required|string|max:255',
+            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'required|string|max:1000',
+        ]);
+
+        if ($request->hasFile('filepath')) {
+            $image = $request->file('filepath');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $filePath = public_path('public/images');
+            $image->move($filePath, $imageName);
+            $validatedData['filepath'] = 'images/' . $imageName;
+        } else {
+            $validatedData['filepath'] = null;
+        }
+
+        ActivittiesResponses::create([
+            'user_id' => auth()->user()->id,
+            'activity_id' => $activityId,
+            'check' => $validatedData['check'],
+            'note' => $validatedData['note'],
+            'filepath' => $validatedData['filepath'],
+            'description' => $validatedData['description'],
+        ]);
+
+        return redirect()->route('ActivittieResponses', $activityId)->with('success', 'Resposta Enviada!');
     }
 
     public function show($id)
@@ -72,10 +110,10 @@ class ActivittiesController extends Controller
         $activitties = Activitties::findOrFail($id);
 
         $validatedData = $request->validate([
-             'disciplina' => 'required|integer',
-                'name' => 'required|string|max:255',
-                'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-                'description' => 'required|string|max:1000',
+            'disciplina' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'required|string|max:1000',
         ]);
 
         if($request->hasFile('filepath')){
@@ -93,7 +131,7 @@ class ActivittiesController extends Controller
         return redirect()->route('Activitties')->with('success', 'Atividade Atualizada');
     }
 
-        public function destroy($id)
+    public function destroy($id)
         {
             $activity = Activitties::findOrFail($id);
             unlink(public_path('public/'.$activity->filepath));

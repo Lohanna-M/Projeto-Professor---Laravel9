@@ -34,15 +34,26 @@
                         <td>{{ $user->name }}</td>
                     <td>
                         <a href="{{ route('EditAluno', $user->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Aluno</a>
+                        @if ($user->userRole->role_id == 3)
+
                         <form action="{{ route('DesativarAluno', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PUT')
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Desativar Aluno</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onchange=this.form.submit();>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Desativar</label>
                               </div>
                         </form>
-                        @csrf
+                        @else
+                        <form action="{{ route('AtivarAluno', $user->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onchange=this.form.submit();>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Ativar</label>
+                              </div>
+                        </form>
+                        @endif
                     </td>
                 </tr>
                     @endforeach

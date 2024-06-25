@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -10,8 +11,9 @@ class AlunoController extends Controller
 {
     public function index (Request $request)
     {
-        $users = User::whereHas('userRole', function($query){
-            $query->where('role_id', 3);
+        $users = User::with('userRole')->whereHas('userRole', function($query){
+            $query->where('role_id', 3)->orWhere('role_id', 4);
+
         })->get();
         return view('aluno', compact('users'));
     }
@@ -43,15 +45,28 @@ class AlunoController extends Controller
 
     public function desativar($id)
     {
-        $user = User::find($id);
-        
-        if ($user && $user->role_id == 3){
-        $user->role_id = 4;
-        $user->save();
+        $userRole = UserRole::where('user_id', $id)->first();
+
+        if ($userRole && $userRole->role_id == 3){
+        $userRole->role_id = 4;
+        $userRole->save();
 
         return redirect()->route('Aluno')->with('success', 'Aluno desativado com sucesso.');
     }
 
+    }
+    public function ativar($id)
+    {
+        $userRole = UserRole::where('user_id', $id)->first();
+
+        if ($userRole && $userRole->role_id == 4){
+        $userRole->role_id = 3;
+        $userRole->save();
+
+        return redirect()->route('Aluno')->with('success', 'Aluno desativado com sucesso.');
+        }
+    }
 }
-}
+
+
 

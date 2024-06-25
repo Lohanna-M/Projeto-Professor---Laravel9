@@ -26,8 +26,10 @@ Route::controller(AuthController::class,)->group(function () {
 
 Route::middleware(['aluno'])->group(function(){
     Route::get('/activittiesresponses', [ActivittiesResponsesController::class, 'index'])->name('ActivittiesResponses');
+    Route::get('/activitties/{id}/responses', [ActivittiesResponsesController::class, 'showresponses'])->name('ActivittieResponses');
+    Route::post('/activitties/{activityId}/responses', [ActivittiesResponsesController::class, 'storeResponses'])->name('StoreResponses');
     Route::get('/activittiesresponses/create', [ActivittiesResponsesController::class, 'create'])->name('Responses');
-    Route::post('/activittiesresponses/store', [ActivittiesResponsesController::class, 'store'])->name('Responses.store');
+    Route::post('/activittiesresponses/store', [ActivittiesResponsesController::class, 'store'])->name('Responsesstore');
  });
 
 Route::middleware(['professor'])->group(function(){
@@ -56,5 +58,5 @@ Route::middleware(['professor'])->group(function(){
     Route::get('/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('EditAluno');
     Route::put('/aluno/{id}', [AlunoController::class, 'update'])->name('UpdateAluno');
     Route::put('/aluno/desativar/{id}', [AlunoController::class, 'desativar'])->name('DesativarAluno');
-
+    Route::put('/aluno/ativar/{id}', [AlunoController::class, 'ativar'])->name('AtivarAluno');
 });
