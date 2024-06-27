@@ -26,10 +26,8 @@ Route::controller(AuthController::class,)->group(function () {
 
 Route::middleware(['aluno'])->group(function(){
     Route::get('/activittiesresponses', [ActivittiesResponsesController::class, 'index'])->name('ActivittiesResponses');
-    Route::get('/activitties/{id}/responses', [ActivittiesResponsesController::class, 'showresponses'])->name('ActivittieResponses');
-    Route::post('/activitties/{activityId}/responses', [ActivittiesResponsesController::class, 'storeResponses'])->name('StoreResponses');
-    Route::get('/activittiesresponses/create', [ActivittiesResponsesController::class, 'create'])->name('Responses');
-    Route::post('/activittiesresponses/store', [ActivittiesResponsesController::class, 'store'])->name('Responsesstore');
+    Route::get('/activitties/{id}/responses', [ActivittiesResponsesController::class, 'show'])->name('ResponsesShows');
+    Route::post('/activitties/store', [ActivittiesResponsesController::class, 'store'])->name('ResponsesStore');
  });
 
 Route::middleware(['professor'])->group(function(){

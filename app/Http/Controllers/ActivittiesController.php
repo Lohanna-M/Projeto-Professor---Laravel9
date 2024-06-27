@@ -54,48 +54,10 @@ class ActivittiesController extends Controller
 
     }
 
-    public function showResponses($id){
-        $activity = Activitties::findOrFail($id);
-        $responses = ActivittiesResponses::where('activity_id', $id)->get();
-        return view('activittiesresponses',compact('activity', 'responses'));
-    }
-
-    public function storeResponses(Request $request, $activityId)
-    {
-        $validatedData = $request->validate([
-            'check' => 'required|integer',
-            'note' => 'required|string|max:255',
-            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-            'description' => 'required|string|max:1000',
-        ]);
-
-        if ($request->hasFile('filepath')) {
-            $image = $request->file('filepath');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $filePath = public_path('public/images');
-            $image->move($filePath, $imageName);
-            $validatedData['filepath'] = 'images/' . $imageName;
-        } else {
-            $validatedData['filepath'] = null;
-        }
-
-        ActivittiesResponses::create([
-            'user_id' => auth()->user()->id,
-            'activity_id' => $activityId,
-            'check' => $validatedData['check'],
-            'note' => $validatedData['note'],
-            'filepath' => $validatedData['filepath'],
-            'description' => $validatedData['description'],
-        ]);
-
-        return redirect()->route('ActivittieResponses', $activityId)->with('success', 'Resposta Enviada!');
-    }
-
     public function show($id)
     {
         $activity = Activitties::where('id', $id)->first();
         return view('activittiesshow', compact('activity'));
-
     }
 
     public function edit($id)

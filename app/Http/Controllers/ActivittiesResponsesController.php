@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activitties;
 use Illuminate\Http\Request;
 
 class ActivittiesResponsesController extends Controller
 {
     public function index (Request $request)
     {
-        return view('activittiesresponses');
+        $activitties  = Activitties::get();
+        return view('activittiesresponses', compact('activitties'));
     }
 
-    public function create ()
+    public function show($id)
     {
-        return view('responses');
+        $activity = Activitties::where('id', $id)->first();
+        return view('responsesshow', compact('activity'));
     }
 
 }
