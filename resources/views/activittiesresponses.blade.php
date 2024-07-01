@@ -47,9 +47,10 @@
                 <td>{{ $activity->name }}</td>
                 <td>{{ $activity->diciplines->name}}</td>
                 <td>
-                    <a href="{{ route('ResponsesShows', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
+                    <a href="{{ route('ResponsesShows', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Responder atividade</a>
+                    <a href="{{ route('ResponsesShows', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver atividade</a>
                     @csrf
-            </tr>
+                </tr>
             @endforeach
     </form>
     </div>

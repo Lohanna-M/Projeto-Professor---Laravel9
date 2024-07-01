@@ -24,6 +24,14 @@ body{
     border: 1px solid #333;
   }
 
+  #editor{
+    color: black !important;
+  }
+
+  p{
+    color: black;
+ 
+  }
   .title {
     font-size: 28px;
     font-weight: 600;

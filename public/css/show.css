@@ -13,6 +13,11 @@ body {
     border-radius: 3px 3px 0 0;
 }
 
+p{
+    font-size: 15px;
+    margin: 0%;
+}
+
 .dropdown {
     position: relative;
     display: block;
@@ -20,11 +25,10 @@ body {
     width: max-content;
   }
 
-  .btn-secondary:focus {
+    .btn-secondary:focus {
     background-color: white;
     color: #4CAF50;
     border-color:#4CAF50 ;
-
   }
 
   .btn-secondary {
@@ -49,7 +53,6 @@ body {
     border-radius: 0px 15px 15px 15px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
-
 
   .btn-secondary:hover{
     background-color:#094701;
