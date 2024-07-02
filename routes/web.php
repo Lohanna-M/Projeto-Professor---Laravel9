@@ -9,6 +9,7 @@ use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\RegisterActivittiesController;
 use App\Http\Controllers\RegisterAlunoController;
 use App\Http\Controllers\RegisterDisciplinaController;
+use App\Http\Controllers\VerRespostasController;
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\AlunoAccess;
 use App\Http\Middleware\ProfessorAccess;
@@ -25,9 +26,10 @@ Route::controller(AuthController::class,)->group(function () {
 });
 
 Route::middleware(['aluno'])->group(function(){
-    Route::get('/activittiesresponses', [ActivittiesResponsesController::class, 'index'])->name('ActivittiesResponses');
+    Route::get('/responses', [ActivittiesResponsesController::class, 'index'])->name('ActivittiesResponses');
     Route::get('/activitties/{id}/responses', [ActivittiesResponsesController::class, 'show'])->name('ResponsesShows');
-    Route::post('/activitties/store', [ActivittiesResponsesController::class, 'store'])->name('ResponsesStore');
+    Route::post('/responses/store', [ActivittiesResponsesController::class, 'store'])->name('ResponseStore');
+    Route::get('/download/{id}', [ActivittiesResponsesController::class, 'download'])->name('download');
  });
 
 Route::middleware(['professor'])->group(function(){
@@ -57,4 +59,7 @@ Route::middleware(['professor'])->group(function(){
     Route::put('/aluno/{id}', [AlunoController::class, 'update'])->name('UpdateAluno');
     Route::put('/aluno/desativar/{id}', [AlunoController::class, 'desativar'])->name('DesativarAluno');
     Route::put('/aluno/ativar/{id}', [AlunoController::class, 'ativar'])->name('AtivarAluno');
+
+    Route::get('/ver_respostas', [VerRespostasController::class, 'index'])->name('VerRespostas');
+
 });

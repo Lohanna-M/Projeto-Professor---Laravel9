@@ -38,6 +38,7 @@
                 <td>
                     <form class="form" action="{{ route('DeleteActivitties', $activity->id) }}" method="POST">
                     <a href="{{ route('ShowActivitties', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Ver Atividade</a>
+                    <a href="{{ route( 'VerRespostas' , $activity->id) }}" button type="button" class="btn btn-info btn-rounded" data-mdb-ripple-init>Ver Respostas</a>
                     <a href="{{ route('EditActivitties', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Editar Atividade</a>
                     @csrf
                     @method('delete')
