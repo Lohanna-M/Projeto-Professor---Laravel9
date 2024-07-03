@@ -13,9 +13,34 @@
     <link rel="stylesheet" href={{asset('css/responses.css')}}>
 </head>
 <body>
+    <div class="conteiner">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Atividades</th>
+                </tr>
+            </thead>
+            <div class="container">
+                @if(Session::has('success'))
+            <div class="alert alert-success">
+            {{Session::get('success')}}
+            </div>
+                @elseif(Session::has('fail'))
+            <div class="alert alert-danger">
+            {{Session::get('fail')}}
+            </div>
+            @endif
+        <tbody>
+            @foreach ($activitties as $activity)
+            <tr>
+                <td>{{ $activity->id }}</td>
+                <td><a href="{{ route('VerRespostasShow', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Corrigir Atividade</a></td>
+            </tr>
+            @endforeach
+    </form>
+    </div>
 
 
- 
 </body>
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
