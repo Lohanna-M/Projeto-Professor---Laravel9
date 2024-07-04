@@ -40,20 +40,30 @@
                     <div class="modal-body">
                         <a href="{{ asset( 'public/'.$activity->filepath )}}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
                             <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download
-                            <img src="{{ $activity->filepath }}"  style="width: 100%; height: auto;">
                             </button>
-                           </a>
-                            @csrf
-                            <h5>Descrição:</h5>
-                            <p class="card-text" id="description">{!!$activity->description!!}</p>
+                        </a>
+                        @csrf
+                        <h5>Descrição:</h5>
+                        <p class="card-text" id="description">{!!$activity->description!!}</p>
+
                             <div class="form-group">
                                 <label for="response">Sua Resposta</label>
                                 <textarea name="description" id="editor"></textarea>
                             </div>
+                            <br>
                             <div class="form-group">
                                 <label for="responseImage">Enviar Imagem</label>
                                 <input type="file" name="filepath" class="form-control-file" id="responseImage" accept="image/*" required>
                             </div>
+                    <div class="form-group">
+                        <label for="grade">Nota</label>
+                        <input type="text" class="form-control" id="grade" value="{{ $activity->note ?? 'Ainda não avaliado' }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status de Visualização</label>
+                        <input type="text" class="form-control" id="status" value="{{ $activity->check ? 'Já vista' : 'Ainda não vista' }}" readonly>
+                    </div>
+                    <br>
                             <button type="submit" class="btn btn-success">Enviar Resposta</button>
                         </form>
                     </div>

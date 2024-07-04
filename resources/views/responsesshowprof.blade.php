@@ -25,47 +25,38 @@
             </div>
     </nav>
 
-    @foreach ($activitties as $activity)
     @if ($activity)
     <form action="{{ route('VerRespostasStore') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="activity_id" value="{{ $activity->id }}">
-        <div class="" tabindex="-1" aria-labelledby="responseModalLabel{{ $activity->id }}" aria-hidden="true">
+        <div class=""  id="responseModal{{ $activity->id }}"  tabindex="-1" aria-labelledby="responseModalLabel{{ $activity->id}}" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="responseModalLabel{{ $activity->id }}">{{ $activity->name }}</h5>
+                        <h5 class="modal-title" id="responseModalLabel">Atividade:{{ $activity->id }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
-                        <div class="modal-body">
-                            <a href="{{ asset('public/'.$activity->filepath) }}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
-                                <button type="button" style="border: solid 2px; background: none; padding: 5px;">Download
-                                    <img src="{{ $activity->filepath }}" style="width: 100%; height: auto;">
-                                </button>
-                            </a>
+                    <div class="modal-body">
+                        <a href="{{ asset( 'public/'.$activity->filepath )}}" download="{{ asset( 'public/'.$activity->filepath )}}" style="text-decoration: none;">
+                            <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download
+                            </button>
+                           </a>
 
+                        <h5>Descrição:</h5>
+                        <p class="card-text" id="description">{!! $activity->description !!}</p>
 
-                            <h5>Descrição:</h5>
-                            <p class="card-text" id="description">{!! $activity->description !!}</p>
-                            <div class="form-group">
-                                <label for="responseImage">Enviar Imagem</label>
-                                <input type="file" name="filepath" class="form-control-file" id="responseImage" accept="image/*" required>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="grade">Nota</label>
-                                <select name="note" class="form-control" id="grade" required>
-                                    <option value="" disabled selected>Selecione uma nota</option>
+                        <div class="form-group">
+                            <label for="grade">Nota</label>
+                            <select name="note" class="form-control" id="grade" required>
+                            <option value="" disabled selected>Selecione uma nota</option>
                                     @for ($i = 1; $i <= 10; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
                             </div>
-
 
                             <div class="form-group form-check">
                                 <input type="checkbox" name="check" class="form-check-input" id="completed" value="1">
@@ -78,40 +69,7 @@
             </div>
         </form>
     @endif
-@endforeach
-        <script type="importmap">
-            {
-                "imports": {
-                    "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.js",
-                    "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.0/"
-                }
-            }
-        </script>
-        <script type="module">
-            import {
-                ClassicEditor,
-                Essentials,
-                Paragraph,
-                Bold,
-                Italic,
-                Font
-            } from 'ckeditor5';
 
-            ClassicEditor
-                .create( document.querySelector( '#editor' ), {
-                    plugins: [ Essentials, Paragraph, Bold, Italic, Font ],
-                    toolbar: [
-                        'undo', 'redo', '|', 'bold', 'italic', '|',
-                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
-                    ]
-                } )
-                .then( editor => {
-                    window.editor = editor;
-                } )
-                .catch( error => {
-                    console.error( error );
-                } );
-        </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

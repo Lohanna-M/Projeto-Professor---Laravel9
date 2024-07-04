@@ -27,15 +27,16 @@ class VerRespostasController extends Controller
         ]);
         $activity = ActivittiesResponses::find($validatedData['activity_id']);
 
-        if ($request->hasFile('filepath')) {
+        if($request->hasFile('filepath')){
             $image = $request->file('filepath');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $filePath = public_path('images');
-            $image->move($filePath, $imageName);
+            $imageName = time(). '.' .$image->getClientOriginalExtension();
+            $filePath = public_path('public/images');
+            $image->move($filePath,$imageName);
             $validatedData['filepath'] = 'images/' . $imageName;
-        } else {
-            $validatedData['filepath'] = null;
-        }
+            }
+            else{
+                $validatedData['filepath'] = null;
+            }
         $activity = ActivittiesResponses::create([
             'user_id' => Auth::user()->id,
             'activitties_id' => $request->activity_id,
@@ -49,19 +50,20 @@ class VerRespostasController extends Controller
     }
 
         public function show($id) {
-            $activitties = Activitties::all();
-            return view('responsesshowprof', compact('activitties'));
+            $activity  = ActivittiesResponses::find($id);
+            return view('responsesshowprof', compact('activity'));
         }
         
-    public function download($id)
-    {
-    $activity = Activitties::findOrFail($id);
-    $filePath = public_path($activity->filepath);
+        public function download($id)
+        {
+        $activity = Activitties::findOrFail($id);
+        $filePath = public_path($activity->filepath);
 
-    if (file_exists($filePath)) {
+        if (file_exists($filePath)) {
         return response()->download($filePath);
-    } else {
+        } else {
         return redirect()->back()->with('error', 'Arquivo não encontrado.');
-    }
-    }
+        }
+        }
+
 }
