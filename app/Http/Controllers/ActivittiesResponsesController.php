@@ -35,7 +35,7 @@ class ActivittiesResponsesController extends Controller
                 else{
                     $validatedData['filepath'] = null;
                 }
-                
+
             $activity = ActivittiesResponses::create([
                 'user_id' => Auth::user()->id,
                 'activitties_id' => $request->activity_id,
@@ -52,6 +52,12 @@ class ActivittiesResponsesController extends Controller
     {
         $activity = Activitties::where('id', $id)->first();
         return view('responsesshow', compact('activity'));
+    }
+
+    public function responsesshow($id)
+    {
+        $activity = Activitties::where('id', $id)->first();
+        return view('ver_responsesshow', compact('activity'));
     }
 
     public function download($id)

@@ -55,14 +55,6 @@
                                 <label for="responseImage">Enviar Imagem</label>
                                 <input type="file" name="filepath" class="form-control-file" id="responseImage" accept="image/*" required>
                             </div>
-                    <div class="form-group">
-                        <label for="grade">Nota</label>
-                        <input type="text" class="form-control" id="grade" value="{{ $activity->note ?? 'Ainda não avaliado' }}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status de Visualização</label>
-                        <input type="text" class="form-control" id="status" value="{{ $activity->check ? 'Já vista' : 'Ainda não vista' }}" readonly>
-                    </div>
                     <br>
                             <button type="submit" class="btn btn-success">Enviar Resposta</button>
                         </form>

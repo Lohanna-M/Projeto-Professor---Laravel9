@@ -20,8 +20,6 @@ class VerRespostasController extends Controller
 
         $validatedData = $request->validate([
             'activity_id' => 'required|integer|exists:activitties,id',
-            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-            'description' => 'required|string|max:1000',
             'check' => 'required|string|max:1000',
             'note' => 'required|boolean',
         ]);
@@ -40,8 +38,6 @@ class VerRespostasController extends Controller
         $activity = ActivittiesResponses::create([
             'user_id' => Auth::user()->id,
             'activitties_id' => $request->activity_id,
-            'filepath' => $validatedData['filepath'],
-            'description' => $validatedData['description'],
             'check' => $validatedData['check'],
             'note' => $validatedData['note'],
         ]);
@@ -53,7 +49,7 @@ class VerRespostasController extends Controller
             $activity  = ActivittiesResponses::find($id);
             return view('responsesshowprof', compact('activity'));
         }
-        
+
         public function download($id)
         {
         $activity = Activitties::findOrFail($id);

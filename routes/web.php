@@ -28,6 +28,7 @@ Route::controller(AuthController::class,)->group(function () {
 Route::middleware(['aluno'])->group(function(){
     Route::get('/responses', [ActivittiesResponsesController::class, 'index'])->name('ActivittiesResponses');
     Route::get('/activitties/{id}/responses', [ActivittiesResponsesController::class, 'show'])->name('ResponsesShows');
+    Route::get('/activitties/{id}/verresponses', [ActivittiesResponsesController::class, 'responsesshow'])->name('VerResponsesShows');
     Route::post('/responses/store', [ActivittiesResponsesController::class, 'store'])->name('ResponseStore');
     Route::get('/download/{id}', [ActivittiesResponsesController::class, 'download'])->name('download');
  });
