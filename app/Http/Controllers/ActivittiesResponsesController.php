@@ -54,9 +54,8 @@ class ActivittiesResponsesController extends Controller
         return view('responsesshow', compact('activity'));
     }
 
-    public function responsesshow($id)
-    {
-        $activity = Activitties::where('id', $id)->first();
+    public function responsesshow($id){
+        $activity  = ActivittiesResponses::where('activitties_id', $id)->first();
         return view('ver_responsesshow', compact('activity'));
     }
 

@@ -32,10 +32,12 @@
             @endif
         <tbody>
             @foreach ($activitties as $activity)
+
             <tr>
                 <td>{{ $activity->id }}</td>
                 <td><a href="{{ route('VerRespostasShow', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Corrigir Atividade</a></td>
             </tr>
+
             @endforeach
     </form>
     </div>

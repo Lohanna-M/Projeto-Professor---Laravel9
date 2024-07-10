@@ -61,7 +61,7 @@ Route::middleware(['professor'])->group(function(){
     Route::put('/aluno/desativar/{id}', [AlunoController::class, 'desativar'])->name('DesativarAluno');
     Route::put('/aluno/ativar/{id}', [AlunoController::class, 'ativar'])->name('AtivarAluno');
 
-    Route::get('/ver_respostas', [VerRespostasController::class, 'index'])->name('VerRespostas');
+    Route::get('/ver_respostas/{id}', [VerRespostasController::class, 'index'])->name('VerRespostas');
     Route::get('/activity/{id}/responses', [VerRespostasController::class, 'show'])->name('VerRespostasShow');
     Route::post('/activity/store', [VerRespostasController::class, 'store'])->name('VerRespostasStore');
 

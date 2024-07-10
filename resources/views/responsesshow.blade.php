@@ -39,10 +39,8 @@
                     </div>
                     <div class="modal-body">
                         <a href="{{ asset( 'public/'.$activity->filepath )}}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
-                            <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download
-                            </button>
+                        <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download</button>
                         </a>
-                        @csrf
                         <h5>Descrição:</h5>
                         <p class="card-text" id="description">{!!$activity->description!!}</p>
 

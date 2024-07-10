@@ -9,48 +9,42 @@ use Illuminate\Support\Facades\Auth;
 
 class VerRespostasController extends Controller
 {
-    public function index ()
+    public function index ($id)
     {
-        $activitties  = ActivittiesResponses::get();
+        $activitties  = ActivittiesResponses::where('activitties_id', $id)->get();
         return view('responses', compact('activitties'));
     }
 
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
-            'activity_id' => 'required|integer|exists:activitties,id',
-            'check' => 'required|string|max:1000',
-            'note' => 'required|boolean',
-        ]);
-        $activity = ActivittiesResponses::find($validatedData['activity_id']);
-
-        if($request->hasFile('filepath')){
-            $image = $request->file('filepath');
-            $imageName = time(). '.' .$image->getClientOriginalExtension();
-            $filePath = public_path('public/images');
-            $image->move($filePath,$imageName);
-            $validatedData['filepath'] = 'images/' . $imageName;
-            }
-            else{
-                $validatedData['filepath'] = null;
-            }
-        $activity = ActivittiesResponses::create([
-            'user_id' => Auth::user()->id,
-            'activitties_id' => $request->activity_id,
-            'check' => $validatedData['check'],
-            'note' => $validatedData['note'],
+            'activity_id' => 'required|exists:activitties_responses,id',
+            'check' => 'required|boolean',
+            'note' => 'required|numeric|min:0|max:10',
         ]);
 
-        return redirect()->route('VerRespostas')->with('success', 'Resposta Enviada!');
+        $activity = ActivittiesResponses::find($request->activity_id);
+
+        if ($activity) {
+
+            $activity->update([
+                'check' => $validatedData['check'],
+                'note' => $validatedData['note'],
+            ]);
+            
+            return redirect()->route('VerRespostas', ['id' => $activity->id])->with('success', 'Atividade Corrigida!');
+        } else {
+
+            return redirect()->route('VerRespostas', ['id' => $activity->id])->with('fail', 'Atividade não encontrada!');
+        }
     }
 
-        public function show($id) {
+    public function show($id) {
             $activity  = ActivittiesResponses::find($id);
             return view('responsesshowprof', compact('activity'));
         }
 
-        public function download($id)
+    public function download($id)
         {
         $activity = Activitties::findOrFail($id);
         $filePath = public_path($activity->filepath);

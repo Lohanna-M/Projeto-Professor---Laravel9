@@ -24,7 +24,7 @@
             </ul>
             </div>
     </nav>
-    <form action="{{ route('ResponseStore') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('VerRespostasStore') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="activity_id" value="{{ $activity->id }}">
         <div class="" id="responseModal{{ $activity->id }}" tabindex="-1" aria-labelledby="responseModalLabel{{ $activity->id }}" aria-hidden="true">
@@ -36,23 +36,23 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="grade">Nota</label>
-                        <input type="text" class="form-control" id="grade" value="{{ $activity->note ?? 'Ainda não avaliado' }}" readonly>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="status">Status de Visualização</label>
-                        <input type="text" class="form-control" id="status" value="{{ $activity->check ? 'Já vista' : 'Ainda não vista' }}" readonly>
-                    </div>
-                    <br>
-                        </form>
+                            <div class="form-group">
+                                <label for="grade">Nota</label>
+                                <input type="text" class="form-control" id="grade" value="{{ $activity->note }}" readonly>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="status">Status de Visualização</label>
+                                <input type="text" class="form-control" id="status" value="{{ $activity->check ? 'Já vista' : 'Ainda não vista' }}" readonly>
+                            </div>
+                            <br>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

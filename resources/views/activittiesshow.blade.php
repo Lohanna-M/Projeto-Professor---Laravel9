@@ -12,21 +12,23 @@
     <title>Ver atividade</title>
 </head>
 <body>
-<div class="conteiner d-flex justify-content-center">
-    <table>
-    @if($activity->filepath)
-    <div class="card" style="width: 40rem; margin: 10rem;">
-        <img src="{{asset('public/'.$activity->filepath)}}" alt="{{ $activity->name }}" class="img-fluid">
-        <div class="card-body">
-          <h3 class="card-title">{{$activity->name}}</h3>
-          <h5>Descrição:</h5>
-          <p class="card-text">{!!$activity->description!!}</p>
-        </div>
-      </div>
-    @endif
+    <input type="hidden" name="activity_id" value="{{ $activity->id }}">
+    <div class="" id="responseModal{{ $activity->id }}" tabindex="-1" aria-labelledby="responseModalLabel{{ $activity->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseModalLabel{{ $activity->id }}">{{ $activity->name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a href="{{ asset( 'public/'.$activity->filepath )}}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
+                    <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download</button>
+                    </a>
+                    <h5>Descrição:</h5>
+                    <p class="card-text" id="description">{!!$activity->description!!}</p>
 </div>
-
-    
 </body>
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
