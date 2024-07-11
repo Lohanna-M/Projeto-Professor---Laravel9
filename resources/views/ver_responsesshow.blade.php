@@ -36,6 +36,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                             <div class="form-group">
                                 <label for="grade">Nota</label>
                                 <input type="text" class="form-control" id="grade" value="{{ $activity->note }}" readonly>
