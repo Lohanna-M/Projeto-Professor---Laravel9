@@ -15,7 +15,7 @@ class ActivittiesResponses extends Model
 
     public function activity()
     {
-        return $this->belongsTo(Activitties::class, 'activity_id');
+        return $this->belongsTo(Activitties::class, 'activitties_id', 'id');
     }
 
     public function user()

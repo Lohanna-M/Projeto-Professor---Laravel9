@@ -6,12 +6,42 @@ use App\Models\Activitties;
 use App\Models\ActivittiesResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ActivittiesResponsesController extends Controller
 {
     public function index (Request $request)
     {
-        $activitties  = Activitties::get();
+
+        $activitties  = DB::table('activitties')
+            ->selectRaw("activitties.*,
+                diciplines.name AS disciplina_name,
+                (CASE
+                    WHEN activitties_responses.id is null THEN false
+                    ELSE true
+                END) AS completed
+            ")
+            ->leftJoin('activitties_responses', 'activitties_responses.activitties_id', '=', 'activitties.id')
+            ->leftJoin('users', 'users.id', '=', 'activitties_responses.user_id')
+            ->leftJoin('users_roles', function($query) {
+                $query->on('users_roles.user_id', '=', 'users.id')
+                ->where('role_id', 3);
+            })
+            ->join('diciplines', 'activitties.dicipline_id', '=', 'diciplines.id')
+            ->get();
+
+            // dd($activitties);
+        // $activitties  = Activitties::get();
+
+        // $activittiesWithCompletion = $activitties->map(function ($activity) {
+        //     $activityResponse = ActivittiesResponses::where('activitties_id', $activity->id)
+
+        //                                             ->first();
+        //                                             // dd($activityResponse);
+        //     $activity->completed = !is_null($activityResponse);
+        //     return $activity;
+        // });
+
         return view('activittiesresponses', compact('activitties'));
     }
 
