@@ -5,6 +5,7 @@ use App\Http\Controllers\ActivittiesResponsesController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ControledeatividadesController;
+use App\Http\Controllers\DetalhesContaController;
 use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\RegisterActivittiesController;
 use App\Http\Controllers\RegisterAlunoController;
@@ -31,6 +32,7 @@ Route::middleware(['aluno'])->group(function(){
     Route::get('/activitties/{id}/verresponses', [ActivittiesResponsesController::class, 'responsesshow'])->name('VerResponsesShows');
     Route::post('/responses/store', [ActivittiesResponsesController::class, 'store'])->name('ResponseStore');
     Route::get('/download/{id}', [ActivittiesResponsesController::class, 'download'])->name('download');
+    Route::get('/detalhesconta/{id}', [DetalhesContaController::class, 'index'])->name('DetalhesContaAluno');
  });
 
 Route::middleware(['professor'])->group(function(){
@@ -65,5 +67,6 @@ Route::middleware(['professor'])->group(function(){
     Route::get('/activity/{id}/responses', [VerRespostasController::class, 'show'])->name('VerRespostasShow');
     Route::post('/activity/store', [VerRespostasController::class, 'store'])->name('VerRespostasStore');
 
-
+    Route::get('/verdetalhesconta/{id}', [ActivittiesController::class, 'detalhescontashow'])->name('VerDetalhesConta');
+    Route::get('/verdetalhesconta/{id}/edit', [ActivittiesController::class, 'detalhescontaedit'])->name('EditarDetalhesConta');
 });

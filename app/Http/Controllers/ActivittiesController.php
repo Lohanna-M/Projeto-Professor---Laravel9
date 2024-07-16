@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activitties;
 use App\Models\ActivittiesResponses;
 use App\Models\Discipline;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -60,6 +61,12 @@ class ActivittiesController extends Controller
         return view('activittiesshow', compact('activity'));
     }
 
+    public function detalhescontashow($id){
+
+        $user = User::findOrFail($id);
+        return view('detalhescontaprof', compact('user'));
+    }
+
     public function download($id)
     {
     $activity = Activitties::findOrFail($id);
@@ -73,7 +80,7 @@ class ActivittiesController extends Controller
     }
 
     public function edit($id)
-    
+
     {
         $activity = Activitties::findOrFail($id);
         $diciplines = Discipline::all();

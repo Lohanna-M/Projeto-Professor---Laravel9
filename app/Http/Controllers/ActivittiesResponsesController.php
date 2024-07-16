@@ -30,18 +30,6 @@ class ActivittiesResponsesController extends Controller
             ->join('diciplines', 'activitties.dicipline_id', '=', 'diciplines.id')
             ->get();
 
-            // dd($activitties);
-        // $activitties  = Activitties::get();
-
-        // $activittiesWithCompletion = $activitties->map(function ($activity) {
-        //     $activityResponse = ActivittiesResponses::where('activitties_id', $activity->id)
-
-        //                                             ->first();
-        //                                             // dd($activityResponse);
-        //     $activity->completed = !is_null($activityResponse);
-        //     return $activity;
-        // });
-
         return view('activittiesresponses', compact('activitties'));
     }
 
