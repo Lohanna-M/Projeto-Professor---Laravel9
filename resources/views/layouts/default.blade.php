@@ -30,8 +30,8 @@
             </button>
             <ul class="dropdown-menu conta">
                 <li><a class="dropdown-item" href="{{ route('VerDetalhesConta', [Auth::user()->id]) }}">Ver Detalhes da Conta</a></li>
-                <li><a class="dropdown-item" href="#">Atualizar Detalhes da Conta</a></li>
-                <li><a class="dropdown-item" href="#">Sair</a></li>
+                <li><a class="dropdown-item" href="{{ route('EditarConta', [Auth::user()->id]) }}">Atualizar Detalhes da Conta</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout')}}">Sair</a></li>
             </ul>
         </div>
     </nav>

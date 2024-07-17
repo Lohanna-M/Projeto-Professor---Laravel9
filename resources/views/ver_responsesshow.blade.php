@@ -48,6 +48,7 @@
                                 <input type="text" class="form-control" id="status" value="{{ $activity->check ? 'Já vista' : 'Ainda não vista' }}" readonly>
                             </div>
                             <br>
+                            
                     </div>
                 </div>
             </div>

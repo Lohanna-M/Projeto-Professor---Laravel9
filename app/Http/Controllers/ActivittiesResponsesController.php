@@ -74,6 +74,9 @@ class ActivittiesResponsesController extends Controller
 
     public function responsesshow($id){
         $activity  = ActivittiesResponses::where('activitties_id', $id)->first();
+        if(!$activity){
+            return redirect()->back()->with('fail', 'Resposta não encontrada!');
+        }
         return view('ver_responsesshow', compact('activity'));
     }
 

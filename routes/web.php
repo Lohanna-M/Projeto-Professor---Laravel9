@@ -24,6 +24,8 @@ Route::controller(AuthController::class,)->group(function () {
 
     Route::get('/', 'login',)->name('login');
     Route::post('/login', 'loginAction',)->name('login.action');
+
+    Route::post('/logout')->name('logout');
 });
 
 Route::middleware(['aluno'])->group(function(){
@@ -68,5 +70,6 @@ Route::middleware(['professor'])->group(function(){
     Route::post('/activity/store', [VerRespostasController::class, 'store'])->name('VerRespostasStore');
 
     Route::get('/verdetalhesconta/{id}', [ActivittiesController::class, 'detalhescontashow'])->name('VerDetalhesConta');
-    Route::get('/verdetalhesconta/{id}/edit', [ActivittiesController::class, 'detalhescontaedit'])->name('EditarDetalhesConta');
+    Route::get('/editardetalhes/{id}/edit', [DetalhesContaController::class, 'edit'])->name('EditarConta');
+    Route::put('/updatedetalhes/{id}', [DetalhesContaController::class, 'update'])->name('UpdateConta');
 });
