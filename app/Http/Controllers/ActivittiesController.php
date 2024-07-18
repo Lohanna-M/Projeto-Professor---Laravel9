@@ -8,6 +8,7 @@ use App\Models\Discipline;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ActivittiesController extends Controller
@@ -114,13 +115,17 @@ class ActivittiesController extends Controller
     }
 
     public function destroy($id)
-        {
-            $activity = Activitties::findOrFail($id);
-            unlink(public_path('public/'.$activity->filepath));
-            $activity->delete();
-
-            return redirect()->route('Activitties')->with('fail', 'Atividade Deletada!');
-        }
+    {
+    $activity = Activitties::findOrFail($id);
+    DB::table('activitties_responses')->where('activitties_id', $id)->delete();
+    $filePath = public_path('images/' . $activity->filepath);
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
+    $activity->delete();
+    
+    return redirect()->route('Activitties')->with('fail', 'Atividade Deletada!');
+    }
 
 }
 

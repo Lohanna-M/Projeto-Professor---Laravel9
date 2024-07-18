@@ -9,6 +9,16 @@
     <title>Login</title>
 </head>
 <body>
+    <div class="container">
+        @if(Session::has('success'))
+    <div class="alert alert-success">
+    {{Session::get('success')}}
+    </div>
+        @elseif(Session::has('fail'))
+    <div class="alert alert-danger">
+    {{Session::get('fail')}}
+    </div>
+    @endif
 <form class="form" action="{{ route('login.action') }}" method="POST">
     @csrf
     <div class="conteiner"> <p class="title">Login</p>

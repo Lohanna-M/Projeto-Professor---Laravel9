@@ -32,11 +32,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="responseModalLabel{{ $activity->id }}">{{ $activity->name }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <a href="{{ route('ActivittiesResponses')}}" class="btn-close" aria-label="Close"></a>
                     </div>
-
                             <div class="form-group">
                                 <label for="grade">Nota</label>
                                 <input type="text" class="form-control" id="grade" value="{{ $activity->note }}" readonly>
@@ -48,7 +45,7 @@
                                 <input type="text" class="form-control" id="status" value="{{ $activity->check ? 'Já vista' : 'Ainda não vista' }}" readonly>
                             </div>
                             <br>
-                            
+
                     </div>
                 </div>
             </div>

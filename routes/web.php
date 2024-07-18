@@ -22,10 +22,10 @@ Route::controller(AuthController::class,)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/registerSave', 'registerSave')->name('register.save');
 
-    Route::get('/', 'login',)->name('login');
-    Route::post('/login', 'loginAction',)->name('login.action');
+    Route::get('/', 'login')->name('login');
+    Route::post('/login', 'loginAction')->name('login.action');
 
-    Route::post('/logout')->name('logout');
+    Route::post('/logout', 'logoutAction')->name('logout');
 });
 
 Route::middleware(['aluno'])->group(function(){

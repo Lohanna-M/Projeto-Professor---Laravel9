@@ -89,7 +89,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('fail', 'Email e/ou senha inválidos!');
     }
 
-    public function logout(Request $request)
+    public function logoutAction(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
@@ -98,7 +98,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Logout realizado com sucesso');
     }
 
-    
+
 
 
 }
