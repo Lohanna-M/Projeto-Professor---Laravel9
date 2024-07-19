@@ -43,7 +43,7 @@ class AuthController extends Controller
 
             if ($request->has('professor') && $request->professor) {
                 UserRole::create([
-                    'user_id' => $user->id,
+                    'user_id' => $user->id, 
                     'role_id' => 2,
                 ]);
             }
@@ -57,7 +57,7 @@ class AuthController extends Controller
 
             if(Auth::attempt(['name' => $request->name,'email' => $request->email, 'password' => $request->password])){
                 $request->session()->regenerate();
-                return redirect()->route('login')->with('success', 'Usuário registrado com sucesso!');
+                return redirect()->route('Activitties')->with('success', 'Usuário registrado com sucesso!');
         }
     }
         return back()->withErrors([
@@ -97,8 +97,6 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Logout realizado com sucesso');
     }
-
-
 
 
 }

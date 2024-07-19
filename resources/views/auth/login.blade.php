@@ -37,7 +37,6 @@
     @enderror
 </label>
 <a href="{{ route('Activitties') }}"><button class="submit">Login</button></a>
-<p class="mb-0">Não possui uma conta?<a href="{{ route('register') }}" class="register_button">Registre-se</a></p>
 </div>
 </form>
 </body>

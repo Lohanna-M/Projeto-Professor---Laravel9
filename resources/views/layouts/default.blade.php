@@ -31,6 +31,7 @@
             <ul class="dropdown-menu conta">
                 <li><a class="dropdown-item" href="{{ route('VerDetalhesConta', [Auth::user()->id]) }}">Ver Detalhes da Conta</a></li>
                 <li><a class="dropdown-item" href="{{ route('EditarConta', [Auth::user()->id]) }}">Atualizar Detalhes da Conta</a></li>
+                <li><a class="dropdown-item" href="{{ route('register') }}">Registrar Nova Conta</a></li>
                 <li>
                     <form action="{{ route('logout')}}" method="POST">
                         @csrf
