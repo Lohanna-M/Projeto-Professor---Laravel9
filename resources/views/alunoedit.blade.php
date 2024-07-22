@@ -24,7 +24,7 @@
         </label>
         <label>
             <input class="input" name="password" type="password" placeholder="" required="password">
-            <span>{{$user->password}}</span>
+            <span>Senha</span>
         </label>
         <button class="submit">Editar</button>
        </div>

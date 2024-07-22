@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -19,9 +20,9 @@ class AuthController extends Controller
     {
         //Validação
         $request->validate([
-                'name' => 'required|',
-                'email' => 'required|email|',
-                'password' => 'required|',
+            'name' => 'required|',
+            'email' => 'required|email|',
+            'password' => 'required|',
         ]);
 
         $user = User::create([
@@ -43,7 +44,7 @@ class AuthController extends Controller
 
             if ($request->has('professor') && $request->professor) {
                 UserRole::create([
-                    'user_id' => $user->id, 
+                    'user_id' => $user->id,
                     'role_id' => 2,
                 ]);
             }
@@ -55,15 +56,12 @@ class AuthController extends Controller
                 ]);
             }
 
-            if(Auth::attempt(['name' => $request->name,'email' => $request->email, 'password' => $request->password])){
-                $request->session()->regenerate();
-                return redirect()->route('Activitties')->with('success', 'Usuário registrado com sucesso!');
+            return redirect()->route('Activitties')->with('success', 'Usuário registrado com sucesso!');
         }
-    }
         return back()->withErrors([
-        'error' => 'Ocorreu um erro ao registrar o usuário. Tente novamente.',
-    ]);
-}
+            'error' => 'Ocorreu um erro ao registrar o usuário. Tente novamente.',
+        ]);
+    }
     public function login(Request $request)
     {
         return view('auth.login');
@@ -77,12 +75,12 @@ class AuthController extends Controller
             'password' => 'required|',
         ]);
         //Autenticação
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
 
-            if(Auth::user()->userRole->role_id == 3){
+            if (Auth::user()->userRole->role_id == 3) {
                 return redirect()->route('ActivittiesResponses')->with('success', 'Login realizado com sucesso!');
-            }else{
+            } else {
                 return redirect()->route('Activitties')->with('success', 'Login realizado com sucesso!');
             }
         }
@@ -97,6 +95,4 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Logout realizado com sucesso');
     }
-
-
 }

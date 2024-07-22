@@ -44,8 +44,8 @@
                     @method('delete')
                     <button type="submit" class="btn btn-danger btn-rounded">Deletar Atividade</button>
             </tr>
+        </form>
             @endforeach
-    </form>
     </div>
     </body>
     @endsection

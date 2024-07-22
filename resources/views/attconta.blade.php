@@ -20,12 +20,12 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
                 <div class="card-header">
        <div class="conteiner"> <p class="title">Atualizar Conta</p>
         <label>
-            <span>{{$user->name}}</span>
-            <input class="input" name="name" type="name" placeholder="" required="name">
+           Nome: 
+            <input class="input" name="name" type="name" placeholder="" required="name" value="{{$user->name}}">
         </label>
         <label>
-            <span>{{$user->email}}</span>
-            <input class="input" name="email" type="email" placeholder="" required="email">
+            Email:
+            <input class="input" name="email" type="email" placeholder="" required="email" value="{{$user->email}}">
         </label>
         <button class="submit">Atualizar</button>
        </div>

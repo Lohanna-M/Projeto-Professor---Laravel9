@@ -35,13 +35,11 @@ class ActivittiesResponsesController extends Controller
 
         public function store(Request $request)
         {
-
             $validatedData = $request->validate([
-                'activity_id' => 'required|integer|exists:activitties,id',
+                'activity_id' => 'integer|exists:activitties,id',
                 'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-                'description' => 'required|string|max:1000',
+                'description' => 'nullable|string|max:1000',
             ]);
-            $activity = ActivittiesResponses::find($validatedData['activity_id']);
 
             if($request->hasFile('filepath')){
                 $image = $request->file('filepath');
@@ -54,14 +52,18 @@ class ActivittiesResponsesController extends Controller
                     $validatedData['filepath'] = null;
                 }
 
-            $activity = ActivittiesResponses::create([
-                'user_id' => Auth::user()->id,
-                'activitties_id' => $request->activity_id,
-                'filepath' => $validatedData['filepath'],
-                'description' => $validatedData['description'],
-                'check' => false,
-                'note' => 0.0,
-            ]);
+                $activityResponse = ActivittiesResponses::updateOrCreate(
+                    [
+                        'user_id' => Auth::user()->id,
+                        'activitties_id' => $request->activity_id,
+                    ],
+                    [
+                        'filepath' => $validatedData['filepath'],
+                        'description' => $validatedData['description'],
+                        'check' => false,
+                        'note' => 0.0,
+                    ]
+                );
 
             return redirect()->route('ActivittiesResponses')->with('success', 'Resposta Enviada!');
         }
@@ -69,6 +71,7 @@ class ActivittiesResponsesController extends Controller
     public function show($id)
     {
         $activity = Activitties::where('id', $id)->first();
+    
         return view('responsesshow', compact('activity'));
     }
 
@@ -94,4 +97,3 @@ class ActivittiesResponsesController extends Controller
 
 
 }
-

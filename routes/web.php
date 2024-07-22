@@ -24,7 +24,6 @@ Route::controller(AuthController::class,)->group(function () {
     Route::post('/login', 'loginAction')->name('login.action');
     Route::get('/register', 'register')->name('register');
     Route::post('/registerSave', 'registerSave')->name('register.save');
-
     Route::post('/logout', 'logoutAction')->name('logout');
 });
 

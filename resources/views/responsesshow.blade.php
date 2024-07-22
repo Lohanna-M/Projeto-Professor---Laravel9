@@ -49,7 +49,7 @@
                             <br>
                             <div class="form-group">
                                 <label for="responseImage">Enviar Imagem</label>
-                                <input type="file" name="filepath" class="form-control-file" id="responseImage" accept="image/*" required>
+                                <input type="file" name="filepath" class="form-control-file" id="responseImage" accept="image/*">
                             </div>
                     <br>
                             <button type="submit" class="btn btn-success">Enviar Resposta</button>

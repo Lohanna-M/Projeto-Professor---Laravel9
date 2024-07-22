@@ -28,10 +28,10 @@ class ActivittiesController extends Controller
     public function store(Request $request)
     {
             $validatedData = $request->validate([
-                'disciplina' => 'required|integer',
-                'name' => 'required|string|max:255',
-                'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-                'description' => 'required|string|max:1000',
+                'disciplina' => 'nullable|integer',
+                'name' => 'nullable|string|max:255',
+                'filepath' => 'file|mimes:jpg,png,jpeg,gif|max:2048',
+                'description' => 'nullable|string|max:1000',
             ]);
 
             if($request->hasFile('filepath')){
@@ -123,7 +123,7 @@ class ActivittiesController extends Controller
         unlink($filePath);
     }
     $activity->delete();
-    
+
     return redirect()->route('Activitties')->with('fail', 'Atividade Deletada!');
     }
 
