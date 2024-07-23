@@ -52,27 +52,59 @@ class ActivittiesResponsesController extends Controller
                     $validatedData['filepath'] = null;
                 }
 
-                $activityResponse = ActivittiesResponses::updateOrCreate(
-                    [
+                $activitties = ActivittiesResponses::create([
                         'user_id' => Auth::user()->id,
                         'activitties_id' => $request->activity_id,
-                    ],
-                    [
                         'filepath' => $validatedData['filepath'],
                         'description' => $validatedData['description'],
                         'check' => false,
                         'note' => 0.0,
-                    ]
-                );
-
+        ]);
             return redirect()->route('ActivittiesResponses')->with('success', 'Resposta Enviada!');
         }
+
+        public function edit($id)
+    {
+        $activity = ActivittiesResponses::where('activitties_id',$id)->first();
+        if(!$activity){
+            return redirect()->back();
+        }
+        return view('responsesedit', compact('activity'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $activitties = ActivittiesResponses::find($id);
+
+        $validatedData = $request->validate([
+            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        if($request->hasFile('filepath')){
+            $image = $request->file('filepath');
+            $imageName = time(). '.' .$image->getClientOriginalExtension();
+            $filePath = public_path('public/images');
+            $image->move($filePath,$imageName);
+            $validatedData['filepath'] = 'images/' . $imageName;
+            }
+            else{
+                $validatedData['filepath'] = null;
+            }
+        $activitties->update($validatedData);
+
+        return redirect()->route('ActivittiesResponses')->with('success', 'Atividade Editada');
+    }
+
 
     public function show($id)
     {
         $activity = Activitties::where('id', $id)->first();
-    
-        return view('responsesshow', compact('activity'));
+        $user_id = auth()->id();
+        $response = ActivittiesResponses::where('activitties_id', $id)
+                                        ->where('user_id', $user_id)
+                                        ->first();
+        return view('responsesshow', compact('activity', 'response'));
     }
 
     public function responsesshow($id){
