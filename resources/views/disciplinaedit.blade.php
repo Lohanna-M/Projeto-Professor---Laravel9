@@ -9,16 +9,27 @@
     <link rel="stylesheet" href={{asset('css/registers.css')}}>
     <title>Editar Disciplina</title>
 </head>
+<style>
+    a {
+       text-decoration: none;
+       color: #000000;
+   }
+   a:hover{
+       color: #000000;
+
+   }
+</style>
 <body>
     <form action="{{ route('UpdateDisciplina', $dicipline->id) }}" method="POST" class="form">
         @csrf
         @method('PUT')
        <div class="conteiner"> <p class="title">Editar Disciplina</p>
         <label>
-            <input class="input" name="name" type="name" placeholder="" required="name">
+            <input class="input" name="name" type="name" value="{{$dicipline->name}}">
             <span>{{$dicipline->name}}</span>
         </label>
         <button class="submit">Editar</button>
+        <button class="submit"><a href="{{ route('Disciplina') }}">Cancelar</a></button>
        </div>
     </form>
 </body>

@@ -9,26 +9,36 @@
     <link rel="stylesheet" href="css/app.css">
     <title>Registre-se</title>
 </head>
+<style>
+    a {
+       text-decoration: none;
+       color: #000000;
+   }
+   a:hover{
+       color: #000000;
+
+   }
+</style>
 <body>
     <form class="form" action="{{ route('register.save') }}" method="POST">
         @csrf
         <div class="conteiner"> <p class="title">Registre-se</p>
         <label>
-            <input class="input" type="text" name="name" required="name">
+            <input class="input" type="text" name="name">
             <span>Nome:</span>
             @error('name')
             <span>{{ $message }}</span>
             @enderror
         </label>
         <label>
-            <input class="input" type="email" name="email" required="email">
+            <input class="input" type="email" name="email">
             <span>Email:</span>
             @error('email')
             <span>{{ $message }}</span>
             @enderror
         </label>
         <label>
-            <input class="input" type="password" name="password" required="password">
+            <input class="input" type="password" name="password">
             <span>Senha:</span>
             @error('password')
             <span>{{ $message }}</span>
@@ -52,7 +62,7 @@
              Aluno
             </label>
           </div>
-        <a href="{{ route('login') }}"><button class="submit">Registre-se</button></a>
+        <button class="submit"><a href="{{ route('login') }}">Registre-se</a></button>
         </div>
     </form>
 </body>

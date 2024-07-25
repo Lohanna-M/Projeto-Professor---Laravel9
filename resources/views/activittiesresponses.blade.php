@@ -49,12 +49,12 @@
                             <td>{{ $activity->name }}</td>
                             <td>{{ $activity->disciplina_name }}</td>
                             <td>
-                                @if (isset($response) && $response)
-                                <a href="{{ route('EditResponses', $response->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Editar atividade</a>
+                                @if($activity->response_id)
+                                <a href="{{ route('EditResponses', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Editar atividade</a>
                                 @else
-                                    <a href="{{ route('ResponsesShows', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Responder atividade</a>
+                                <a href="{{ route('ResponsesShows', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Responder atividade</a>
                                 @endif
-                                    <a href="{{ route('VerResponsesShows', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver atividade</a>
+                                <a href="{{ route('VerResponsesShows', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver atividade</a>
 
                                 @if ($activity->completed)
                                     <span class="badge bg-success">Completada</span>

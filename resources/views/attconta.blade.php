@@ -11,6 +11,16 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <link rel="stylesheet" href={{asset('css/activitties.css')}}>
 <title>Ver Detalhes da Conta</title>
 </head>
+<style>
+    a {
+       text-decoration: none;
+       color: #000000;
+   }
+   a:hover{
+       color: #000000;
+
+   }
+</style>
 <body>
     <form action="{{ route('UpdateConta', $user->id) }}" method="POST" class="form">
         @csrf
@@ -18,9 +28,9 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
         <div class="container mt-5">
             <div class="card">
                 <div class="card-header">
-       <div class="conteiner"> <p class="title">Atualizar Conta</p>
+                    <div class="conteiner"> <p class="title">Atualizar Conta</p>
         <label>
-           Nome: 
+           Nome:
             <input class="input" name="name" type="name" placeholder="" required="name" value="{{$user->name}}">
         </label>
         <label>
@@ -28,6 +38,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
             <input class="input" name="email" type="email" placeholder="" required="email" value="{{$user->email}}">
         </label>
         <button class="submit">Atualizar</button>
+        <button class="submit"><a href="{{ route('Activitties') }}">Voltar</a></button>
        </div>
     </form>
 </body>

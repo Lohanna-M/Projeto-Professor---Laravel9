@@ -9,14 +9,25 @@
     <link rel="stylesheet" href="css/registers.css">
     <title>Registrar Disciplina</title>
 </head>
+<style>
+     a {
+        text-decoration: none;
+        color: #000000;
+    }
+    a:hover{
+        color: #000000;
+
+    }
+</style>
 <body>
     <form action="{{ route('StoreDisciplina') }}" method="POST" class="form">
         @csrf
        <div class="conteiner"> <p class="title">Registrar Disciplina</p>
         <label>
-            <input class="input" name="name" type="name" placeholder="" required="name">
+            <input class="input" name="name" type="name">
             <span>Nome da Disciplina:</span>
         </label>
+        <button class="submit"><a href="{{ route('Disciplina') }}">Cancelar</a></button>
         <button class="submit">Registrar</button>
        </div>
     </form>

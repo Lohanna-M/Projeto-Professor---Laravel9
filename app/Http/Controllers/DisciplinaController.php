@@ -20,13 +20,15 @@ class DisciplinaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|',
+            'name' => 'nullable|string|max:255',
         ]);
 
-        Discipline::create([
-            'name'=> $request->name
-         ]);
-         return redirect()->route('Disciplina')->with('success', 'Disciplina adicionada');
+        if ($request->has('name') && !empty($request->name)) {
+            Discipline::create([
+                'name' => $request->name
+            ]);
+            return redirect()->route('Disciplina')->with('success', 'Disciplina adicionada');
+        }
     }
 
     public function edit($id){
@@ -37,9 +39,9 @@ class DisciplinaController extends Controller
     public function update(Request $request, $id){
         $disciplines = Discipline::findOrFail($id);
         $request->validate([
-            'name' => 'required|',
+            'name' => 'nullable|string|max:255',
         ]);
-
+        
         $disciplines->update($request->only('name'));
         return redirect()->route('Disciplina')->with('success', 'Disciplina atualizada');
     }

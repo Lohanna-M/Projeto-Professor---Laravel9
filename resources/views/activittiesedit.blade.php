@@ -57,7 +57,9 @@
             </label>
             <input type="file" class="form-control-file" id="filepath" name="filepath">
         </div>
+        <a href="{{ route('Activitties') }}" class="btn btn-primary">Voltar</a>
         <button type="submit" class="btn btn-primary">Editar</button>
+
     </form>
 
 </body>

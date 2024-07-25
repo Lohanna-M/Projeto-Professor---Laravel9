@@ -9,23 +9,34 @@
     <link rel="stylesheet" href={{asset('css/registers.css')}}>
     <title>Editar Aluno</title>
 </head>
+<style>
+    a {
+       text-decoration: none;
+       color: #000000;
+   }
+   a:hover{
+       color: #000000;
+
+   }
+</style>
 <body>
     <form action="{{ route('UpdateAluno', $user->id) }}" method="POST" class="form">
         @csrf
         @method('PUT')
        <div class="conteiner"> <p class="title">Editar Aluno</p>
         <label>
-            <input class="input" name="name" type="name" placeholder="" required="name">
+            <input class="input" name="name" type="name" placeholder="" value="{{$user->name}}">
             <span>{{$user->name}}</span>
         </label>
         <label>
-            <input class="input" name="email" type="email" placeholder="" required="email">
+            <input class="input" name="email" type="email" placeholder="" value="{{$user->email}}">
             <span>{{$user->email}}</span>
         </label>
         <label>
-            <input class="input" name="password" type="password" placeholder="" required="password">
+            <input class="input" name="password" type="password">
             <span>Senha</span>
         </label>
+        <button class="submit"><a href="{{ route('Aluno') }}">Cancelar</a></button>
         <button class="submit">Editar</button>
        </div>
     </form>

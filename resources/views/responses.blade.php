@@ -13,36 +13,41 @@
     <title>Corrigir atividade</title>
 </head>
 <body>
-    <div class="conteiner">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Atividades</th>
-                </tr>
-            </thead>
-            <div class="container">
-                @if(Session::has('success'))
-            <div class="alert alert-success">
-            {{Session::get('success')}}
-            </div>
-                @elseif(Session::has('fail'))
-            <div class="alert alert-danger">
-            {{Session::get('fail')}}
-            </div>
-            @endif
-        <tbody>
-            @foreach ($activitties as $activity)
+    <div class="container">
+        <h1 class="mb-4">Respostas da Atividade</h1>
 
-            <tr>
-                <td>{{ $activity->id }}</td>
-                <td><a href="{{ route('VerRespostasShow', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Corrigir Atividade</a></td>
-            </tr>
-
-            @endforeach
-    </form>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Alunos que Responderam</h5>
+            </div>
+            <div class="card-body">
+                @if($activitties->isEmpty())
+                    <p class="text-center">Não há respostas pendentes para esta atividade.</p>
+                @else
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Nome do Aluno</th>
+                                <th scope="col">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($activitties as $activity)
+                                <tr>
+                                    <td>{{ $activity->user->name ?? 'Nome não disponível' }}</td>
+                                    <td>
+                                        <a href="{{ route('VerRespostasShow', $activity->id) }}" class="btn btn-success btn-sm" data-mdb-ripple-init>
+                                            Corrigir Atividade
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
     </div>
-
-
 </body>
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

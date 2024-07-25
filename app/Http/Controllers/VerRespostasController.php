@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activitties;
 use App\Models\ActivittiesResponses;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,11 @@ class VerRespostasController extends Controller
 {
     public function index ($id)
     {
-        $activitties  = ActivittiesResponses::where('activitties_id', $id)->get();
+        $activitties = ActivittiesResponses::where('activitties_id', $id)
+        ->where('check', false)
+        ->with('user')  
+        ->get();
+
         return view('responses', compact('activitties'));
     }
 
@@ -31,16 +36,18 @@ class VerRespostasController extends Controller
                 'check' => $validatedData['check'],
                 'note' => $validatedData['note'],
             ]);
-            
+
             return redirect()->route('VerRespostas', ['id' => $activity->id])->with('success', 'Atividade Corrigida!');
         } else {
-
             return redirect()->route('VerRespostas', ['id' => $activity->id])->with('fail', 'Atividade não encontrada!');
         }
     }
 
     public function show($id) {
             $activity  = ActivittiesResponses::find($id);
+            if(!$activity){
+                return redirect()->route('VerRespostas', ['id' => $id])->with('fail', 'Resposta não encontrada.');
+            }
             return view('responsesshowprof', compact('activity'));
         }
 

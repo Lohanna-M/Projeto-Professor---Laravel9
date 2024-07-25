@@ -12,25 +12,25 @@ class ActivittiesResponsesController extends Controller
 {
     public function index (Request $request)
     {
+            $user_id = Auth::user()->id;
+            $activitties = DB::table('activitties')
+                ->selectRaw("activitties.*,
+                    diciplines.name AS disciplina_name,
+                    activitties_responses.id AS response_id,
+                    (CASE
+                        WHEN activitties_responses.id is null THEN false
+                        ELSE true
+                    END) AS completed
+                ")
+                ->leftJoin('activitties_responses', function($join) use ($user_id) {
+                    $join->on('activitties_responses.activitties_id', '=', 'activitties.id')
+                         ->where('activitties_responses.user_id', '=', $user_id);
+                })
+                ->join('diciplines', 'activitties.dicipline_id', '=', 'diciplines.id')
+                ->get();
 
-        $activitties  = DB::table('activitties')
-            ->selectRaw("activitties.*,
-                diciplines.name AS disciplina_name,
-                (CASE
-                    WHEN activitties_responses.id is null THEN false
-                    ELSE true
-                END) AS completed
-            ")
-            ->leftJoin('activitties_responses', 'activitties_responses.activitties_id', '=', 'activitties.id')
-            ->leftJoin('users', 'users.id', '=', 'activitties_responses.user_id')
-            ->leftJoin('users_roles', function($query) {
-                $query->on('users_roles.user_id', '=', 'users.id')
-                ->where('role_id', 3);
-            })
-            ->join('diciplines', 'activitties.dicipline_id', '=', 'diciplines.id')
-            ->get();
+            return view('activittiesresponses', compact('activitties'));
 
-        return view('activittiesresponses', compact('activitties'));
     }
 
         public function store(Request $request)
@@ -40,18 +40,6 @@ class ActivittiesResponsesController extends Controller
                 'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
                 'description' => 'nullable|string|max:1000',
             ]);
-
-        $user_id = Auth::user()->id;
-        $activity_id = $request->activity_id;
-
-        $existingResponse = ActivittiesResponses::where('user_id', $user_id)
-                                            ->where('activitties_id', $activity_id)
-                                            ->first();
-
-             if ($existingResponse) {
-            return redirect()->route('EditResponses', $existingResponse->id)
-                         ->with('info', 'Você já respondeu a esta atividade. Você pode editar sua resposta.');
-            }
 
             if($request->hasFile('filepath')){
                 $image = $request->file('filepath');
@@ -81,15 +69,24 @@ class ActivittiesResponsesController extends Controller
         if(!$activity){
             return redirect()->back()->with('fail', 'Resposta não encontrada.');;
         }
+
+        if ($activity->check) {
+            return redirect()->back()->with('fail', 'Não é possível editar a atividade após correção.');
+        }
         return view('responsesedit', compact('activity'));
     }
 
-        public function update(Request $request, $id)
+
+    public function update(Request $request, $id)
 {
     $activity = ActivittiesResponses::find($id);
 
     if (!$activity) {
         return redirect()->back()->with('fail', 'Resposta não encontrada.');
+    }
+
+    if ($activity->check) {
+        return redirect()->route('ActivittiesResponses')->with('fail', 'Não é possível editar a atividade após correção.');
     }
 
     $validatedData = $request->validate([
@@ -111,7 +108,6 @@ class ActivittiesResponsesController extends Controller
 
     return redirect()->route('ActivittiesResponses')->with('success', 'Atividade Editada');
 }
-
 
     public function show($id)
         {
