@@ -54,7 +54,7 @@
                                 @else
                                 <a href="{{ route('ResponsesShows', $activity->id) }}" button type="button" class="btn btn-success btn-rounded" data-mdb-ripple-init>Responder atividade</a>
                                 @endif
-                                <a href="{{ route('VerResponsesShows', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver atividade</a>
+                                <a href="{{ route('VerResponsesShows', $activity->id) }}" button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-init>Ver nota</a>
 
                                 @if ($activity->completed)
                                     <span class="badge bg-success">Completada</span>

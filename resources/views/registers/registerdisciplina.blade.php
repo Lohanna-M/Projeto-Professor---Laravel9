@@ -27,8 +27,8 @@
             <input class="input" name="name" type="name">
             <span>Nome da Disciplina:</span>
         </label>
-        <button class="submit"><a href="{{ route('Disciplina') }}">Cancelar</a></button>
-        <button class="submit">Registrar</button>
+        <button type="submit" class="botão">Registrar</button>
+        <button type="submit" class="botão"><a href="{{ route('Disciplina') }}">Cancelar</a></button>
        </div>
     </form>
 </body>

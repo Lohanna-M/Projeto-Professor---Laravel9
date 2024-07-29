@@ -93,10 +93,10 @@ class ActivittiesController extends Controller
         $activitties = Activitties::findOrFail($id);
 
         $validatedData = $request->validate([
-            'disciplina' => 'required|integer',
-            'name' => 'required|string|max:255',
+            'disciplina' => 'nullable|integer',
+            'name' => 'nullable|string|max:255',
             'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-            'description' => 'required|string|max:1000',
+            'description' => 'nullable|string|max:1000',
         ]);
 
         if($request->hasFile('filepath')){
@@ -119,9 +119,6 @@ class ActivittiesController extends Controller
     $activity = Activitties::findOrFail($id);
     DB::table('activitties_responses')->where('activitties_id', $id)->delete();
     $filePath = public_path('images/' . $activity->filepath);
-    if (file_exists($filePath)) {
-        unlink($filePath);
-    }
     $activity->delete();
 
     return redirect()->route('Activitties')->with('fail', 'Atividade Deletada!');

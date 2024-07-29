@@ -27,9 +27,9 @@ class AlunoController extends Controller
     public function update(Request $request, $id){
     $user = User::findOrFail($id);
     $request->validate([
-        'name' => 'required|',
-        'email' => 'required|email|',
-        'password' => 'required|',
+        'name' => 'nullable|',
+        'email' => 'nullable|email|',
+        'password' => 'nullable|',
     ]);
     $user->name = $request->input('name');
     $user->email = $request->input('email');

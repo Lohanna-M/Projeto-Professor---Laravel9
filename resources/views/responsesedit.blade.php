@@ -1,5 +1,3 @@
-@extends('layouts.default')
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,28 +21,71 @@
         padding: 0.5rem 1.5rem;
         font-size: 1rem;
     }
+    a {
+       text-decoration: none;
+       color: #ffffff;
+   }
+   a:hover{
+       color: #ffffff;
+
+   }
+body {
+    background-color: #f8f9fa;
+}
+.container {
+    max-width: 800px;
+    margin-top: 50px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.form-group label {
+    font-weight: bold;
+}
+.btn-primary {
+    margin-right: 10px;
+}
+.back-btn a {
+    color: white;
+    text-decoration: none;
+}
 </style>
 <body>
-    <form action="{{ route('UpdateResponses', $activity->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label type=filepath id="description"><h5>Descrição:{!!$activity->description!!}</h5></label>
-            <textarea name="description" id="editor"></textarea>
-        <div class="form-group">
-            <label for="filepath">
-                <h5>Arquivo Atual</h5>
-            </label>
-            <p>{{ $activity->filepath }}</p>
-            <label for="filepath">
-                <h5>Enviar Novo Arquivo</h5>
-            </label>
-            <input type="file" class="form-control-file" id="filepath" name="filepath">
+    <nav class="navbar">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Conta
+            </button>
+            <ul class="dropdown-menu conta">
+                <li><a class="dropdown-item" href="{{ route('DetalhesContaAluno', [Auth::user()->id]) }}">Ver Detalhes
+                        da Conta</a></li>
+                <li><a class="dropdown-item" href="{{ route('login') }}">Sair</a></li>
+            </ul>
+    </nav>
+    </div>
+        <div class="container">
+            <h2 class="text-center mb-4">Editar Resposta</h2>
+            <form action="{{ route('UpdateResponses', $activity->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="description"><h5>Descrição:</h5></label>
+                    <p>{!! $activity->description !!}</p>
+                    <textarea class="form-control" name="description" id="editor" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="filepath"><h5>Arquivo Atual:</h5></label>
+                    <p>{{ $activity->filepath }}</p>
+                    <label for="filepath"><h5>Enviar Novo Arquivo:</h5></label>
+                    <input type="file" class="form-control-file" id="filepath" name="filepath">
+                </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+                <button type="submit" class="btn btn-primary"><a href="{{ route('ActivittiesResponses') }}">Voltar</a></button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">Editar</button>
-    </form>
 </body>
-@endsection
 <script type="importmap">
     {
         "imports": {

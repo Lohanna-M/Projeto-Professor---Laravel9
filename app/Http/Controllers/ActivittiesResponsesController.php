@@ -78,36 +78,37 @@ class ActivittiesResponsesController extends Controller
 
 
     public function update(Request $request, $id)
-{
-    $activity = ActivittiesResponses::find($id);
+    {
+        $activity = ActivittiesResponses::find($id);
 
-    if (!$activity) {
-        return redirect()->back()->with('fail', 'Resposta não encontrada.');
+        if (!$activity) {
+            return redirect()->back()->with('fail', 'Resposta não encontrada.');
+        }
+
+        if ($activity->check) {
+            return redirect()->route('ActivittiesResponses')->with('fail', 'Não é possível editar a atividade após correção.');
+        }
+
+        $validatedData = $request->validate([
+            'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        if ($request->hasFile('filepath')) {
+            $image = $request->file('filepath');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $filePath = public_path('images');
+            $image->move($filePath, $imageName);
+            $validatedData['filepath'] = 'images/' . $imageName;
+        } else {
+            $validatedData['filepath'] = $activity->filepath;
+        }
+
+        $activity->update($validatedData);
+
+        return redirect()->route('ActivittiesResponses')->with('success', 'Atividade Editada');
     }
 
-    if ($activity->check) {
-        return redirect()->route('ActivittiesResponses')->with('fail', 'Não é possível editar a atividade após correção.');
-    }
-
-    $validatedData = $request->validate([
-        'filepath' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
-        'description' => 'nullable|string|max:1000',
-    ]);
-
-    if ($request->hasFile('filepath')) {
-        $image = $request->file('filepath');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $filePath = public_path('public/images');
-        $image->move($filePath, $imageName);
-        $validatedData['filepath'] = 'images/' . $imageName;
-    } else {
-        $validatedData['filepath'] = $activity->filepath;
-    }
-
-    $activity->update($validatedData);
-
-    return redirect()->route('ActivittiesResponses')->with('success', 'Atividade Editada');
-}
 
     public function show($id)
         {

@@ -41,10 +41,11 @@ class DisciplinaController extends Controller
         $request->validate([
             'name' => 'nullable|string|max:255',
         ]);
-        
+
         $disciplines->update($request->only('name'));
         return redirect()->route('Disciplina')->with('success', 'Disciplina atualizada');
     }
+
 
     public function destroy($id)
     {

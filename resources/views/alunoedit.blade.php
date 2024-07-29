@@ -36,10 +36,11 @@
             <input class="input" name="password" type="password">
             <span>Senha</span>
         </label>
-        <button class="submit"><a href="{{ route('Aluno') }}">Cancelar</a></button>
-        <button class="submit">Editar</button>
+        <button type="submit" class="botão">Editar</button>
+        <button type="submit" class="botão"><a href="{{ route('Aluno') }}">Cancelar</a></button>
        </div>
     </form>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
