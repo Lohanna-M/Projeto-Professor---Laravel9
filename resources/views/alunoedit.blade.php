@@ -23,22 +23,23 @@
     <form action="{{ route('UpdateAluno', $user->id) }}" method="POST" class="form">
         @csrf
         @method('PUT')
-       <div class="conteiner"> <p class="title">Editar Aluno</p>
-        <label>
-            <input class="input" name="name" type="name" placeholder="" value="{{$user->name}}">
-            <span>{{$user->name}}</span>
-        </label>
-        <label>
-            <input class="input" name="email" type="email" placeholder="" value="{{$user->email}}">
-            <span>{{$user->email}}</span>
-        </label>
-        <label>
-            <input class="input" name="password" type="password">
-            <span>Senha</span>
-        </label>
-        <button type="submit" class="botão">Editar</button>
-        <button type="submit" class="botão"><a href="{{ route('Aluno') }}">Cancelar</a></button>
-       </div>
+        <div class="conteiner">
+            <p class="title">Editar Aluno</p>
+            <label>
+                <input class="input" name="name" type="text" placeholder="" value="{{ $user->name }}">
+                <span>{{ $user->name }}</span>
+            </label>
+            <label>
+                <input class="input" name="email" type="email" placeholder="" value="{{ $user->email }}">
+                <span>{{ $user->email }}</span>
+            </label>
+            <label>
+                <input class="input" name="password" type="password">
+                <span>Senha</span>
+            </label>
+            <button type="submit" class="botão">Editar</button>
+            <button type="button" class="botão" onclick="window.location.href='{{ route('Aluno') }}'">Cancelar</button>
+        </div>
     </form>
 
 </body>

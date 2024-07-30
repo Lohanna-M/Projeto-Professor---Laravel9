@@ -14,7 +14,7 @@ class VerRespostasController extends Controller
     {
         $activitties = ActivittiesResponses::where('activitties_id', $id)
         ->where('check', false)
-        ->with('user')  
+        ->with('user')
         ->get();
 
         return view('responses', compact('activitties'));
@@ -44,7 +44,7 @@ class VerRespostasController extends Controller
     }
 
     public function show($id) {
-            $activity  = ActivittiesResponses::find($id);
+            $activity  = ActivittiesResponses::with('activity')->find($id);
             if(!$activity){
                 return redirect()->route('VerRespostas', ['id' => $id])->with('fail', 'Resposta não encontrada.');
             }

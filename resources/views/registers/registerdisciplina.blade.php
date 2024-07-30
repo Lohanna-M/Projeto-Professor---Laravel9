@@ -28,7 +28,7 @@
             <span>Nome da Disciplina:</span>
         </label>
         <button type="submit" class="botão">Registrar</button>
-        <button type="submit" class="botão"><a href="{{ route('Disciplina') }}">Cancelar</a></button>
+            <button type="button" class="botão" onclick="window.location.href='{{ route('Disciplina') }}'">Cancelar</button>
        </div>
     </form>
 </body>

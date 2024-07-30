@@ -29,7 +29,8 @@
         <input type="file"name="filepath">
         <label type=filepath id="description">Descrição da Atividade:</label>
         <textarea name="description" id="editor"></textarea>
-        <button class="submit">Registrar</button>
+        <button type="submit" class="botão">Registrar</button>
+        <button type="button" class="botão" onclick="window.location.href='{{ route('Activitties') }}'">Cancelar</button>
        </div>
     </form>
 </body>

@@ -88,7 +88,7 @@
                     <input class="input" name="name" type="text" value="{{ $dicipline->name }}">
                 </label>
                 <button type="submit" class="botão">Editar</button>
-                <button type="button"><a class="botão"href="{{ route('Disciplina') }}">Cancelar</a></button>
+            <button type="button" class="botão" onclick="window.location.href='{{ route('Disciplina') }}'">Cancelar</button>
             </div>
         </form>
     </body>

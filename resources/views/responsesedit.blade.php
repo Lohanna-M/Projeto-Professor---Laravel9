@@ -71,8 +71,7 @@ body {
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="description"><h5>Descrição:</h5></label>
-                    <p>{!! $activity->description !!}</p>
+                    <label for="description"><h5>Descrição:{!! $activity->description !!}</h5></label>
                     <textarea class="form-control" name="description" id="editor" rows="5"></textarea>
                 </div>
                 <div class="form-group">
@@ -81,8 +80,8 @@ body {
                     <label for="filepath"><h5>Enviar Novo Arquivo:</h5></label>
                     <input type="file" class="form-control-file" id="filepath" name="filepath">
                 </div>
-                <button type="submit" class="btn btn-primary">Editar</button>
                 <button type="submit" class="btn btn-primary"><a href="{{ route('ActivittiesResponses') }}">Voltar</a></button>
+                <button type="submit" class="btn btn-primary">Editar</button>
             </form>
         </div>
 </body>
