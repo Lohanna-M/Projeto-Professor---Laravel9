@@ -11,7 +11,17 @@
     <link rel="stylesheet" href={{asset('css/show.css')}}>
     <title>Ver atividade</title>
 </head>
+<style>
+    body{
+        background-color: #e6fde6;
+    }
+</style>
 <body>
+    @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
     <input type="hidden" name="activity_id" value="{{ $activity->id }}">
     <div class="" id="responseModal{{ $activity->id }}" tabindex="-1" aria-labelledby="responseModalLabel{{ $activity->id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -22,7 +32,7 @@
                 </div>
                 <div class="modal-body">
                     <a href="{{ asset( 'public/'.$activity->filepath )}}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
-                    <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download</button>
+                        <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download</button>
                     </a>
                     <h5>Descrição:</h5>
                     <p class="card-text" id="description">{!!$activity->description!!}</p>

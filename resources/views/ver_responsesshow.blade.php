@@ -10,6 +10,7 @@
     <link rel="stylesheet" href={{asset('css/responses.css')}}>
     <title>Ver Atividade</title>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="dropdown">

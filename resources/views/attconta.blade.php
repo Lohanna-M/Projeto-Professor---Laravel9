@@ -37,8 +37,8 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
             Email:
             <input class="input" name="email" type="email" placeholder="" required="email" value="{{$user->email}}">
         </label>
-        <button class="submit">Atualizar</button>
         <button class="submit"><a href="{{ route('Activitties') }}">Voltar</a></button>
+        <button class="submit">Atualizar</button>
        </div>
     </form>
 </body>

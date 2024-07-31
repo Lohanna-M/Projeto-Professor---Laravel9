@@ -9,6 +9,8 @@
                 <li><a class="dropdown-item" href="{{ route('Activitties') }}">Ver Atividades</a></li>
                 <li><a class="dropdown-item" href="{{ route('RegisterActivitties') }}">Registrar Atividade</a></li>
             </ul>
+      </div>
+      <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Disciplinas
@@ -17,6 +19,8 @@
                 <li><a class="dropdown-item" href="{{ route('Disciplina') }}">Ver Disciplinas</a></li>
                 <li><a class="dropdown-item" href="{{ route('RegisterDisciplina') }}">Registrar Disciplina</a></li>
             </ul>
+      </div>
+      <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Alunos
@@ -24,6 +28,8 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('Aluno') }}">Ver Alunos</a></li>
             </ul>
+      </div>
+      <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Conta

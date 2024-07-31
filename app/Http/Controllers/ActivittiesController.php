@@ -68,16 +68,22 @@ class ActivittiesController extends Controller
         return view('detalhescontaprof', compact('user'));
     }
 
+
     public function download($id)
     {
-    $activity = Activitties::findOrFail($id);
-    $filePath = public_path($activity->filepath);
 
-    if (file_exists($filePath)) {
-    return response()->download($filePath);
-    } else {
-    return redirect()->back()->with('error', 'Arquivo não encontrado.');
-    }
+        $activity = Activitties::findOrFail($id);
+
+
+        $filePath = public_path($activity->filepath);
+
+
+        if (file_exists($filePath)) {
+
+            return response()->download($filePath);
+        } else {
+            return redirect()->back()->with('error', 'Arquivo não encontrado.');
+        }
     }
 
     public function edit($id)
