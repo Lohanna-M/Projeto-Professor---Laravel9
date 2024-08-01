@@ -35,9 +35,13 @@
                         <a href="{{ route('ActivittiesResponses')}}" class="btn-close" aria-label="Close"></a>
                     </div>
                     <div class="modal-body">
-                        <a href="{{ asset( 'public/'.$activity->filepath )}}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
-                        <button type="button" style="border: solid 2px; background: none; padding: 5x;">Download</button>
+                        @if (!empty($activity->filepath) && file_exists(public_path('public/'.$activity->filepath)))
+                        <a href="{{ asset('public/'.$activity->filepath) }}" download="{{ asset('public/'.$activity->filepath) }}" style="text-decoration: none;">
+                            <button type="button" style="border: solid 2px; background: none; padding: 5px;">Download</button>
                         </a>
+                        @else
+                        <p>Não há arquivo disponível para download.</p>
+                        @endif
                         <h5>Descrição:</h5>
                         <p class="card-text" id="description">{!!$activity->description!!}</p>
 

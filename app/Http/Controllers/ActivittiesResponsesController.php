@@ -130,14 +130,18 @@ class ActivittiesResponsesController extends Controller
         $activity = Activitties::findOrFail($id);
 
 
-        $filePath = public_path($activity->filepath);
+        if (!empty($activity->filepath)) {
+            $filePath = public_path($activity->filepath);
 
 
-        if (file_exists($filePath)) {
-
-            return response()->download($filePath);
+            if (file_exists($filePath)) {
+                return response()->download($filePath);
+            } else {
+                return redirect()->back()->with('fail', 'Arquivo não encontrado.');
+            }
         } else {
-            return redirect()->back()->with('error', 'Arquivo não encontrado.');
+
+            return redirect()->back()->with('fail', 'Nenhum arquivo para baixar.');
         }
     }
 
